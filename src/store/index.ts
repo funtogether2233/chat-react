@@ -2,6 +2,8 @@ import { createContext } from 'react';
 
 export interface IUserInfo {
   userId: string;
+  curFriendId: string;
+  curGroupId: string;
   isLogin: boolean;
 }
 

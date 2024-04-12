@@ -10,6 +10,8 @@ export default function App() {
 
   const [userInfo, setUserInfo] = useState<IUserInfo>({
     userId: '',
+    curFriendId: '',
+    curGroupId: '',
     isLogin: false
   });
 

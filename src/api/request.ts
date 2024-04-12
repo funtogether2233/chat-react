@@ -36,6 +36,7 @@ const requestHandler = <T>(
   config: AxiosRequestConfig = {}
 ): Promise<T> => {
   let response: Promise<axiosTypes<responseTypes<T>>>;
+  console.log('Axios req', method.toUpperCase(), url, params);
   switch (method) {
     case 'get':
       response = service.get(url, { params: { ...params }, ...config });
@@ -58,7 +59,7 @@ const requestHandler = <T>(
     response
       .then((res) => {
         //业务代码 可根据需求自行处理
-        console.log('request res', res);
+        console.log('Axios res', res);
 
         const data = res.data;
         if (data.code !== 200) {

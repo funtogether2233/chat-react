@@ -1,0 +1,55 @@
+.groupChatRoom {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  .groupInfoWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    border-bottom: 3px solid #e9e9e9;
+    height: 60px;
+  }
+
+  .groupMsg {
+    flex: 1;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .inputWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    height: 160px;
+    border-top: 3px solid #e9e9e9;
+
+    .textArea {
+      flex: 1;
+      width: 100%;
+      padding: 10px;
+      border: 0;
+      background-color: #f2f2f2;
+      font-size: 16px;
+      outline: 0;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    .subBtn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 10px;
+      border-radius: 5px;
+      width: 60px;
+      height: 30px;
+      background-color: #09f;
+      color: #fff;
+    }
+  }
+}

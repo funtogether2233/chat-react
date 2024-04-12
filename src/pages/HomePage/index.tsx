@@ -2,11 +2,11 @@ import { useEffect } from 'react';
 import { Outlet } from 'react-router-dom';
 import { useNav } from '../../hooks/useNav';
 import styles from './HomePage.module.less';
-import ChatNav from './components/HomeNav/HomeNav';
+import HomeNav from './components/HomeNav';
 
 export default function HomePage() {
   useEffect(() => {
-    console.log('ChatPage');
+    console.log('HomePage');
     authLogin();
   });
 
@@ -14,7 +14,7 @@ export default function HomePage() {
 
   return (
     <div className={styles.chat}>
-      <ChatNav></ChatNav>
+      <HomeNav></HomeNav>
       <Outlet></Outlet>
     </div>
   );

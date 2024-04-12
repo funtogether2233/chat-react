@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import { loginApi, registerApi } from '../../api/userAuth';
 import CardWrap from '../../components/CardWrap';
+import { useNav } from '../../hooks/useNav';
 import { useUserContext } from '../../hooks/useUserContext';
 import styles from './LoginPage.module.less';
 
@@ -9,14 +9,12 @@ export default function LoginPage() {
   useEffect(() => {
     console.log('LoginPage');
     if (userInfo.isLogin) {
-      nav('/home');
+      navToRelationship();
     }
   });
 
   const { userInfo, setUserInfo } = useUserContext();
-
-  const nav = useNavigate();
-
+  const { navToRelationship } = useNav();
   const [userId, setUserId] = useState('');
   const [userPwd, setUserPwd] = useState('');
 
@@ -29,14 +27,17 @@ export default function LoginPage() {
     try {
       const loginRes = await loginApi({ userId, userPwd });
       console.log(loginRes);
-      setUserInfo({ ...userInfo, isLogin: true, userId: loginRes.userId });
+      setUserInfo((current) => ({
+        ...current,
+        isLogin: true,
+        userId: loginRes.userId
+      }));
     } catch (err) {
       console.error('err', err);
     }
   };
 
   const registerHandler = async () => {
-    console.log('registerHandler');
     if (userId === '' || userPwd === '') {
       console.warn('帐号或密码不能为空！');
       return;

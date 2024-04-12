@@ -8,6 +8,7 @@ body {
   height: 100vh;
   width: 100vw;
   overflow: hidden;
+  background-color: #f2f2f2;
 }
 
 #root {
