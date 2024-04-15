@@ -9,13 +9,8 @@ export default function MyInfoPage() {
     console.log('MyInfoPage');
   });
 
-  const { userId, setPostId } = useUserContext();
+  const { userId } = useUserContext();
   const { navToPost } = useNav();
-
-  const handleToPost = () => {
-    setPostId(userId);
-    navToPost();
-  };
 
   return (
     <div className={styles.myInfoPage}>
@@ -24,7 +19,12 @@ export default function MyInfoPage() {
       <div className={styles.userId}>userId</div>
       <div className={styles.userIntroduction}>个性签名</div>
       <div className={styles.btnWrap}>
-        <div className={styles.btn} onClick={handleToPost}>
+        <div
+          className={styles.btn}
+          onClick={() => {
+            navToPost(userId);
+          }}
+        >
           动态
         </div>
         <div className={styles.btn}>编辑资料</div>
