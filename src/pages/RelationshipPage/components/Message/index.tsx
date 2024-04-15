@@ -11,8 +11,7 @@ export default function Message({
 }) {
   const { fromId, msg, time } = messageInfo;
 
-  const { userInfo } = useUserContext();
-  const { userId } = userInfo;
+  const { userId } = useUserContext();
 
   return (
     <div className={styles.message}>

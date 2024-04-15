@@ -10,9 +10,12 @@ const router = createHashRouter([{ path: '*', Component: App }]);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   //   <React.StrictMode>
-  <Suspense>
+  <>
     <ToastContainer></ToastContainer>
-    <RouterProvider router={router}></RouterProvider>
-  </Suspense>
+    <Suspense>
+      <RouterProvider router={router}></RouterProvider>
+    </Suspense>
+  </>
+
   //   </React.StrictMode>
 );

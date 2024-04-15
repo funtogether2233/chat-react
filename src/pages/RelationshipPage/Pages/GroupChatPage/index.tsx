@@ -15,12 +15,10 @@ export default function GroupChatPage() {
     });
   }, []);
 
-  const { userInfo } = useUserContext();
-  const { userId, curGroupId } = userInfo;
+  const { userId, curGroupId } = useUserContext();
   const { navToGroupInfo } = useNav();
 
   useEffect(() => {
-    // console.log('group messageInfoList reset');
     socket.emit('join-group', { fromId: userId, toId: curGroupId });
     setMessageInfoList([]);
   }, [curGroupId]);

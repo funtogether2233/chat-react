@@ -1,4 +1,49 @@
+.infoDetailItem {
+  margin-top: 20px;
+}
+
 .myInfoPage {
   display: flex;
+  flex-direction: column;
+  align-items: center;
   flex: 1;
+  padding: 80px;
+
+  .userName {
+    .infoDetailItem();
+    font-size: 28px;
+  }
+
+  .userId {
+    .infoDetailItem();
+    font-size: 24px;
+    color: #cecece;
+  }
+
+  .userIntroduction {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    height: 80px;
+    font-size: 18px;
+    .infoDetailItem();
+  }
+
+  .btnWrap {
+    margin-top: 40px;
+    display: flex;
+
+    .btn {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0 10px;
+      border-radius: 10px;
+      width: 100px;
+      height: 30px;
+      background-color: #09f;
+      color: #fff;
+    }
+  }
 }

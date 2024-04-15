@@ -9,13 +9,13 @@ import styles from './LoginPage.module.less';
 export default function LoginPage() {
   useEffect(() => {
     console.log('LoginPage');
-    if (userInfo.isLogin) {
-      navToRelationship();
+    if (isLogin) {
+      navToHome();
     }
   });
 
-  const { userInfo, setUserInfo } = useUserContext();
-  const { navToRelationship } = useNav();
+  const { isLogin, setUserInfo } = useUserContext();
+  const { navToHome } = useNav();
   const [userId, setUserId] = useState('');
   const [userPwd, setUserPwd] = useState('');
 

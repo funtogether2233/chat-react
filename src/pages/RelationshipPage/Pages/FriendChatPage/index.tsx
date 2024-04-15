@@ -15,8 +15,7 @@ export default function FriendChatPage() {
     });
   }, []);
 
-  const { userInfo } = useUserContext();
-  const { userId, curFriendId } = userInfo;
+  const { userId, curFriendId } = useUserContext();
   const { navToFriendInfo } = useNav();
 
   useEffect(() => {

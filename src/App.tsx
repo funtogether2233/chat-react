@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRoutes } from 'react-router-dom';
-import { routes } from './router';
+import { routerEnum, routes } from './router';
 import { IUserInfo, UserContext } from './store';
 
 export default function App() {
@@ -12,7 +12,9 @@ export default function App() {
     userId: '',
     curFriendId: '',
     curGroupId: '',
-    isLogin: false
+    postId: '',
+    isLogin: false,
+    homeNavState: routerEnum.home
   });
 
   return (

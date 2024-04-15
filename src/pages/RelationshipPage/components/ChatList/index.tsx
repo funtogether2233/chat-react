@@ -23,8 +23,7 @@ export default function ChatList({
     getFriendshipList(userId);
   }, []);
 
-  const { userInfo, setUserInfo } = useUserContext();
-  const { userId } = userInfo;
+  const { userId } = useUserContext();
   const { navToFriendChat, navToGroupChat } = useNav();
 
   const [friendshipListInfo, setFriendshipListInfo] = useState<
@@ -32,23 +31,17 @@ export default function ChatList({
   >([]);
   const getFriendshipList = async (userId: string) => {
     try {
-      console.log('userId', userId);
       const friendshipListRes = await getFriendshipListApi({ userId });
-      console.log(friendshipListRes);
       setFriendshipListInfo(friendshipListRes.friendshipList);
     } catch (err) {
       console.error('err', err);
     }
   };
-  const handleFriendship = (friendId: string) => {
-    setUserInfo((cur) => ({ ...cur, curFriendId: friendId }));
-    navToFriendChat();
-  };
   const FriendshipList = friendshipListInfo.map((friendshipInfo) => {
     const { friendId } = friendshipInfo;
     return (
       <FriendItem
-        onClick={() => handleFriendship(friendId)}
+        onClick={() => navToFriendChat(friendId)}
         friendId={friendId}
         key={friendId}
       ></FriendItem>
@@ -65,23 +58,17 @@ export default function ChatList({
   const [groupListInfo, setGroupListInfo] = useState<IGroupInfo[]>([]);
   const getGroupList = async (userId: string) => {
     try {
-      console.log('userId', userId);
       const groupListRes = await getGroupListApi({ userId });
-      console.log(groupListRes);
       setGroupListInfo(groupListRes.groupList);
     } catch (err) {
       console.error('err', err);
     }
   };
-  const handleGroup = (groupId: string) => {
-    setUserInfo((cur) => ({ ...cur, curGroupId: groupId }));
-    navToGroupChat();
-  };
   const GroupList = groupListInfo.map((groupInfo) => {
     const { groupId } = groupInfo;
     return (
       <GroupItem
-        onClick={() => handleGroup(groupId)}
+        onClick={() => navToGroupChat(groupId)}
         groupId={groupId}
         key={groupId}
       ></GroupItem>

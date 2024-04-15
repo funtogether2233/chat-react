@@ -1,10 +1,13 @@
 import { createContext } from 'react';
+import { routerEnum } from '../router';
 
 export interface IUserInfo {
   userId: string;
   curFriendId: string;
   curGroupId: string;
+  postId: string;
   isLogin: boolean;
+  homeNavState: routerEnum;
 }
 
 interface IUserContext {

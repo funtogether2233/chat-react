@@ -3,24 +3,42 @@ import { routerEnum } from '../router';
 import { useUserContext } from './useUserContext';
 
 export function useNav() {
-  const { userInfo } = useUserContext();
+  const {
+    isLogin,
+    homeNavState,
+    setCurFriendId,
+    setCurGroupId,
+    setHomeNavState
+  } = useUserContext();
   const nav = useNavigate();
-  const isLogin = userInfo.isLogin;
+
+  const homeNavNavigate = (newNavState: routerEnum) => {
+    if (homeNavState === newNavState) {
+      return;
+    }
+    setHomeNavState(newNavState);
+    nav(newNavState);
+  };
 
   const navToLogin = () => {
     nav(routerEnum.login);
   };
-  const navToRelationship = () => {
-    nav(routerEnum.relationship);
+  const navToHome = () => {
+    nav(routerEnum.home);
   };
-  const navToFriendChat = () => {
+  const navToRelationship = () => {
+    homeNavNavigate(routerEnum.relationship);
+  };
+  const navToFriendChat = (newFriendId: string) => {
+    setCurFriendId(newFriendId);
     nav(routerEnum.friendChat);
   };
-  const navToGroupChat = () => {
+  const navToGroupChat = (newGroupId: string) => {
+    setCurGroupId(newGroupId);
     nav(routerEnum.groupChat);
   };
   const navToMyInfo = () => {
-    nav(routerEnum.myInfo);
+    homeNavNavigate(routerEnum.myInfo);
   };
   const navToFriendInfo = () => {
     nav(routerEnum.friendInfo);
@@ -29,10 +47,10 @@ export function useNav() {
     nav(routerEnum.groupInfo);
   };
   const navToDoc = () => {
-    nav(routerEnum.doc);
+    homeNavNavigate(routerEnum.doc);
   };
   const navToPost = () => {
-    nav(routerEnum.post);
+    homeNavNavigate(routerEnum.post);
   };
 
   const authLogin = () => {
@@ -42,6 +60,7 @@ export function useNav() {
   };
 
   return {
+    navToHome,
     navToRelationship,
     navToFriendChat,
     navToGroupChat,
