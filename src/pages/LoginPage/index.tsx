@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import { loginApi, registerApi } from '../../api/userAuth';
 import CardWrap from '../../components/CardWrap';
 import { useNav } from '../../hooks/useNav';
@@ -19,33 +20,41 @@ export default function LoginPage() {
   const [userPwd, setUserPwd] = useState('');
 
   const loginHandler = async () => {
-    console.log('loginHandler');
     if (userId === '' || userPwd === '') {
-      console.warn('帐号或密码不能为空！');
+      const warnContent = '帐号或密码不能为空！';
+      console.warn(warnContent);
+      toast.warn(warnContent);
       return;
     }
     try {
       const loginRes = await loginApi({ userId, userPwd });
-      console.log(loginRes);
       setUserInfo((current) => ({
         ...current,
         isLogin: true,
         userId: loginRes.userId
       }));
+      const sucContent = '登录成功';
+      toast.success(sucContent);
     } catch (err) {
       console.error('err', err);
+      toast.error(String(err));
     }
   };
 
   const registerHandler = async () => {
     if (userId === '' || userPwd === '') {
-      console.warn('帐号或密码不能为空！');
+      const warnContent = '帐号或密码不能为空！';
+      console.warn(warnContent);
+      toast.warn(warnContent);
       return;
     }
     try {
-      console.log(await registerApi({ userId, userPwd }));
+      await registerApi({ userId, userPwd });
+      const sucContent = '注册成功';
+      toast.success(sucContent);
     } catch (err) {
       console.error(err);
+      toast.error(String(err));
     }
   };
 
