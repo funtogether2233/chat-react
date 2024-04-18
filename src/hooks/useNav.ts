@@ -13,8 +13,8 @@ export function useNav() {
   } = useUserContext();
   const nav = useNavigate();
 
-  const homeNavNavigate = (newNavState: routerEnum) => {
-    if (homeNavState === newNavState) {
+  const homeNavNavigate = (newNavState: routerEnum, verifyState = true) => {
+    if (verifyState && homeNavState === newNavState) {
       return;
     }
     setHomeNavState(newNavState);
@@ -39,7 +39,7 @@ export function useNav() {
     nav(routerEnum.groupChat);
   };
   const navToMyInfo = () => {
-    homeNavNavigate(routerEnum.myInfo);
+    homeNavNavigate(routerEnum.myInfo, false);
   };
   const navToFriendInfo = () => {
     nav(routerEnum.friendInfo);

@@ -9,13 +9,8 @@ export default function FriendInfoPage() {
     console.log('FriendInfoPage');
   });
 
-  const { userId, setPostId } = useUserContext();
+  const { curFriendId } = useUserContext();
   const { navToPost } = useNav();
-
-  const handleToPost = () => {
-    setPostId(userId);
-    navToPost();
-  };
 
   return (
     <div className={styles.friendInfoPage}>
@@ -24,7 +19,12 @@ export default function FriendInfoPage() {
       <div className={styles.userId}>userId</div>
       <div className={styles.userIntroduction}>个性签名</div>
       <div className={styles.btnWrap}>
-        <div className={styles.btn} onClick={handleToPost}>
+        <div
+          className={styles.btn}
+          onClick={() => {
+            navToPost(curFriendId);
+          }}
+        >
           查看动态
         </div>
       </div>
