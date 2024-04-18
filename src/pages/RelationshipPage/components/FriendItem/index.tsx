@@ -21,7 +21,7 @@ export default function FriendItem({
       <div className={styles.friendItem}>
         <div className={styles.friendInfo}>
           <Avatar></Avatar>
-          <div className={styles.friendId}>{friendshipInfo.userId}</div>
+          <div className={styles.userName}>{friendshipInfo.userName}</div>
         </div>
         <div className={styles.btnWrap}>{btnNode}</div>
       </div>

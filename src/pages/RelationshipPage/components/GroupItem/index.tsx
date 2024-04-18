@@ -21,7 +21,7 @@ export default function GroupItem({
       <div className={styles.groupItem}>
         <div className={styles.groupInfo}>
           <Avatar></Avatar>
-          <div className={styles.groupId}>{groupInfo.groupId}</div>
+          <div className={styles.groupName}>{groupInfo.groupName}</div>
         </div>
         <div className={styles.btnWrap}>{btnNode}</div>
       </div>

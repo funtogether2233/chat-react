@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
+import { getUserInfoApi } from '../../../../api/relationship';
 import { socket } from '../../../../api/socket';
 import SimpleButton from '../../../../components/SimpleButton';
 import { useNav } from '../../../../hooks/useNav';
 import { useUserContext } from '../../../../hooks/useUserContext';
 import { IMessageInfo } from '../../../../types/chatMessage';
+import { IUserInfo } from '../../../../types/relationship';
 import Message from '../../components/Message';
 import styles from './FriendChatPage.module.less';
 
@@ -18,9 +21,23 @@ export default function FriendChatPage() {
 
   const { userId, curFriendId } = useUserContext();
   const { navToFriendInfo } = useNav();
+  const [userInfo, setUserInfo] = useState<IUserInfo>();
+
+  const init = async () => {
+    try {
+      const userInfoRes = await getUserInfoApi({
+        userId: curFriendId
+      });
+      setUserInfo(userInfoRes);
+    } catch (err) {
+      toast.error(String(err));
+      console.error('err', err);
+    }
+  };
 
   useEffect(() => {
     setMessageInfoList([]);
+    init();
   }, [curFriendId]);
 
   const [messageInfoList, setMessageInfoList] = useState<IMessageInfo[]>([]);
@@ -56,7 +73,7 @@ export default function FriendChatPage() {
     <div className={styles.friendChatRoom}>
       <div className={styles.friendInfoWrap}>
         <div className={styles.friendInfo} onClick={() => navToFriendInfo()}>
-          {curFriendId}
+          {userInfo?.userName}
         </div>
       </div>
       <div className={styles.friendMsg}>{MessageList}</div>

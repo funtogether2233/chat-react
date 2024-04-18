@@ -1,9 +1,12 @@
 import { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
+import { getGroupInfoApi } from '../../../../api/relationship';
 import { socket } from '../../../../api/socket';
 import SimpleButton from '../../../../components/SimpleButton';
 import { useNav } from '../../../../hooks/useNav';
 import { useUserContext } from '../../../../hooks/useUserContext';
 import { IMessageInfo } from '../../../../types/chatMessage';
+import { IGroupInfo } from '../../../../types/relationship';
 import Message from '../../components/Message';
 import styles from './GroupChatPage.module.less';
 
@@ -18,10 +21,24 @@ export default function GroupChatPage() {
 
   const { userId, curGroupId } = useUserContext();
   const { navToGroupInfo } = useNav();
+  const [groupInfo, setGroupInfo] = useState<IGroupInfo>();
+
+  const init = async () => {
+    try {
+      const groupInfoRes = await getGroupInfoApi({
+        groupId: curGroupId
+      });
+      setGroupInfo(groupInfoRes);
+    } catch (err) {
+      toast.error(String(err));
+      console.error('err', err);
+    }
+  };
 
   useEffect(() => {
     socket.emit('join-group', { fromId: userId, toId: curGroupId });
     setMessageInfoList([]);
+    init();
   }, [curGroupId]);
 
   const [messageInfoList, setMessageInfoList] = useState<IMessageInfo[]>([]);
@@ -53,7 +70,7 @@ export default function GroupChatPage() {
     <div className={styles.groupChatRoom}>
       <div className={styles.groupInfoWrap}>
         <div className={styles.groupInfo} onClick={() => navToGroupInfo()}>
-          {curGroupId}
+          {groupInfo?.groupName}
         </div>
       </div>
       <div className={styles.groupMsg}>{MessageList}</div>
