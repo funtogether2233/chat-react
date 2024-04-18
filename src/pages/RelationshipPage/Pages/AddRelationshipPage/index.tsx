@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
-  addFriendshipAPI,
-  addGroupAPI,
+  addFriendshipApi,
+  addGroupApi,
   searchFriendshipListApi,
   searchGroupshipListApi
 } from '../../../../api/relationship';
@@ -77,7 +77,7 @@ export default function AddRelationshipPage() {
 
   const handleAddFriend = async (userId: string, friendId: string) => {
     try {
-      const addFriendshipRes = await addFriendshipAPI({
+      const addFriendshipRes = await addFriendshipApi({
         userId,
         friendId
       });
@@ -90,7 +90,7 @@ export default function AddRelationshipPage() {
   };
   const handleAddGroup = async (userId: string, groupId: string) => {
     try {
-      const addGroupRes = await addGroupAPI({
+      const addGroupRes = await addGroupApi({
         userId,
         groupId
       });

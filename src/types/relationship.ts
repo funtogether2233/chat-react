@@ -61,3 +61,35 @@ export interface ISetUpNewGroupParam {
 }
 
 export interface ISetUpNewGroupRes {}
+
+export interface IUserInfo {
+  userId: string;
+  userName: string;
+  userIntroduction: string;
+}
+
+export interface IGetUserInfoParam {
+  userId: string;
+}
+
+export interface IGetUserInfoRes extends IUserInfo {}
+
+export interface IGroupInfo {
+  groupId: string;
+  groupName: string;
+  groupIntroduction: string;
+}
+
+export interface IGetGroupInfoParam {
+  groupId: string;
+}
+
+export interface IGetGroupInfoRes extends IGroupInfo {}
+
+export interface IUpdateUserInfoParam extends IUserInfo {}
+
+export interface IUpdateUserInfoRes {}
+
+export interface IUpdateGroupInfoParam extends IGroupInfo {}
+
+export interface IUpdateGroupInfoRes {}

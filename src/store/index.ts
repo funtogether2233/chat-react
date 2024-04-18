@@ -1,7 +1,7 @@
 import { createContext } from 'react';
 import { routerEnum } from '../router';
 
-export interface IUserInfo {
+export interface IGlobalInfo {
   userId: string;
   curFriendId: string;
   curGroupId: string;
@@ -11,8 +11,8 @@ export interface IUserInfo {
 }
 
 interface IUserContext {
-  userInfo: IUserInfo;
-  setUserInfo: React.Dispatch<React.SetStateAction<IUserInfo>>;
+  userInfo: IGlobalInfo;
+  setUserInfo: React.Dispatch<React.SetStateAction<IGlobalInfo>>;
 }
 
 export const UserContext = createContext<IUserContext | null>(null);

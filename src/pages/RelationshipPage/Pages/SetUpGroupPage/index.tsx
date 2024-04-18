@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { setUpNewGroupAPI } from '../../../../api/relationship';
+import { setUpNewGroupApi } from '../../../../api/relationship';
 import SimpleButton from '../../../../components/SimpleButton';
 import { useUserContext } from '../../../../hooks/useUserContext';
 import styles from './SetUpGroupPage.module.less';
@@ -22,7 +22,7 @@ export default function SetUpGroupPage() {
       return;
     }
     try {
-      const addGroupRes = await setUpNewGroupAPI({
+      const addGroupRes = await setUpNewGroupApi({
         userId,
         groupId: newGroupId,
         groupName: newGroupName

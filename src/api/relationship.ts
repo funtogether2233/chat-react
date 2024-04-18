@@ -5,14 +5,22 @@ import {
   IAddGroupRes,
   IGetFriendshipListParam,
   IGetFriendshipListRes,
+  IGetGroupInfoParam,
+  IGetGroupInfoRes,
   IGetGroupListParam,
   IGetGroupListRes,
+  IGetUserInfoParam,
+  IGetUserInfoRes,
   ISearchFriendshipListParam,
   ISearchFriendshipListRes,
   ISearchGroupListParam,
   ISearchGroupListRes,
   ISetUpNewGroupParam,
-  ISetUpNewGroupRes
+  ISetUpNewGroupRes,
+  IUpdateGroupInfoParam,
+  IUpdateGroupInfoRes,
+  IUpdateUserInfoParam,
+  IUpdateUserInfoRes
 } from '../types/relationship';
 import { request } from './request';
 
@@ -56,7 +64,7 @@ export const searchGroupshipListApi = (
     });
 };
 
-export const addFriendshipAPI = (
+export const addFriendshipApi = (
   data: IAddFriendshipParam
 ): Promise<IAddFriendshipRes> => {
   return request
@@ -66,7 +74,7 @@ export const addFriendshipAPI = (
     });
 };
 
-export const addGroupAPI = (data: IAddGroupParam): Promise<IAddGroupRes> => {
+export const addGroupApi = (data: IAddGroupParam): Promise<IAddGroupRes> => {
   return request
     .post<IAddGroupRes>('/group-member/add-group', data)
     .catch((err) => {
@@ -74,11 +82,51 @@ export const addGroupAPI = (data: IAddGroupParam): Promise<IAddGroupRes> => {
     });
 };
 
-export const setUpNewGroupAPI = (
+export const setUpNewGroupApi = (
   data: ISetUpNewGroupParam
 ): Promise<ISetUpNewGroupRes> => {
   return request
     .post<ISetUpNewGroupRes>('/group/set-up-new-group', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const getUserInfoApi = (
+  data: IGetUserInfoParam
+): Promise<IGetUserInfoRes> => {
+  return request
+    .post<IGetUserInfoRes>('/user/get-user-info', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const getGroupInfoApi = (
+  data: IGetGroupInfoParam
+): Promise<IGetGroupInfoRes> => {
+  return request
+    .post<IGetGroupInfoRes>('/group/get-group-info', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const updateUserInfoApi = (
+  data: IUpdateUserInfoParam
+): Promise<IUpdateUserInfoRes> => {
+  return request
+    .post<IUpdateUserInfoRes>('/user/update-user-info', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const updateGroupInfoApi = (
+  data: IUpdateGroupInfoParam
+): Promise<IUpdateGroupInfoRes> => {
+  return request
+    .post<IUpdateGroupInfoRes>('/group/update-group-info', data)
     .catch((err) => {
       throw new Error(err.message);
     });
