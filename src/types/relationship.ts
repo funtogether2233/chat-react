@@ -39,3 +39,17 @@ export interface ISearchGroupListParam {
 export interface ISearchGroupListRes {
   groupList: IGroupInfo[];
 }
+
+export interface IAddFriendshipParam {
+  userId: string;
+  friendId: string;
+}
+
+export interface IAddFriendshipRes {}
+
+export interface IAddGroupParam {
+  userId: string;
+  groupId: string;
+}
+
+export interface IAddGroupRes {}

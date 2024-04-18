@@ -1,9 +1,12 @@
 import { useEffect, useState } from 'react';
 import {
+  addFriendshipAPI,
+  addGroupAPI,
   searchFriendshipListApi,
   searchGroupshipListApi
 } from '../../../../api/relationship';
 import SimpleButton from '../../../../components/SimpleButton';
+import { useUserContext } from '../../../../hooks/useUserContext';
 import { IFriendshipInfo, IGroupInfo } from '../../../../types/relationship';
 import FriendItem from '../../components/FriendItem';
 import GroupItem from '../../components/GroupItem';
@@ -19,6 +22,7 @@ export default function AddRelationshipPage() {
     console.log('AddRelationshipPage');
   });
 
+  const { userId } = useUserContext();
   const [addRelaState, setAddRelaState] = useState(addRelaStateEnum.friend);
   const [inputContent, setInputContent] = useState('');
   const [friendListInfo, setFriendListInfo] = useState<IFriendshipInfo[]>([]);
@@ -62,22 +66,48 @@ export default function AddRelationshipPage() {
     }
   };
 
-  const handleAddFriend = () => {};
-  const handleAddGroup = () => {};
-  const AddFriendBtn = (
-    <SimpleButton btnTxt={'加好友'} onClick={handleAddFriend}></SimpleButton>
+  const handleAddFriend = async (userId: string, friendId: string) => {
+    try {
+      const addFriendshipRes = await addFriendshipAPI({
+        userId,
+        friendId
+      });
+      console.log(addFriendshipRes);
+    } catch (err) {
+      console.error('err', err);
+    }
+  };
+  const handleAddGroup = async (userId: string, groupId: string) => {
+    try {
+      const addGroupRes = await addGroupAPI({
+        userId,
+        groupId
+      });
+      console.log(addGroupRes);
+    } catch (err) {
+      console.error('err', err);
+    }
+  };
+  const AddFriendBtn = (userId: string, friendId: string) => (
+    <SimpleButton
+      btnTxt={'加好友'}
+      onClick={() => handleAddFriend(userId, friendId)}
+    ></SimpleButton>
   );
-  const AddGroupBtn = (
-    <SimpleButton btnTxt={'加群'} onClick={handleAddGroup}></SimpleButton>
+  const AddGroupBtn = (userId: string, groupId: string) => (
+    <SimpleButton
+      btnTxt={'加群'}
+      onClick={() => handleAddGroup(userId, groupId)}
+    ></SimpleButton>
   );
   const FriendList = friendListInfo.map((friendshipInfo) => {
-    const { userId } = friendshipInfo;
+    const friendId = friendshipInfo.userId;
     return (
       <FriendItem
         friendshipInfo={friendshipInfo}
         paddingX={100}
-        btnNode={AddFriendBtn}
-        key={userId}
+        btnNode={AddFriendBtn(userId, friendId)}
+        key={friendId}
       ></FriendItem>
     );
   });
@@ -87,7 +117,7 @@ export default function AddRelationshipPage() {
       <GroupItem
         groupInfo={groupInfo}
         paddingX={100}
-        btnNode={AddGroupBtn}
+        btnNode={AddGroupBtn(userId, groupId)}
         key={groupId}
       ></GroupItem>
     );
@@ -135,7 +165,7 @@ export default function AddRelationshipPage() {
           margin={'20px'}
         ></SimpleButton>
       </div>
-      <div>{RelaList}</div>
+      <div className={styles.relaList}>{RelaList}</div>
     </div>
   );
 }
