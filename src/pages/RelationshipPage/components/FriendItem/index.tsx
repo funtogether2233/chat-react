@@ -6,12 +6,14 @@ import styles from './FriendItem.module.less';
 export default function FriendItem({
   onClick,
   friendshipInfo,
+  userStatusNode,
   btnNode,
   paddingY,
   paddingX
 }: {
   onClick?: () => void;
   friendshipInfo: IFriendshipInfo;
+  userStatusNode?: React.ReactNode;
   btnNode?: React.ReactNode;
   paddingY?: number;
   paddingX?: number;
@@ -22,6 +24,7 @@ export default function FriendItem({
         <div className={styles.friendInfo}>
           <Avatar></Avatar>
           <div className={styles.userName}>{friendshipInfo.userName}</div>
+          <div className={styles.userStatus}>{userStatusNode}</div>
         </div>
         <div className={styles.btnWrap}>{btnNode}</div>
       </div>

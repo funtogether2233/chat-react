@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import { getUserInfoApi } from '../../../../api/relationship';
 import Avatar from '../../../../components/Avatar';
+import SimpleButton from '../../../../components/SimpleButton';
 import { useNav } from '../../../../hooks/useNav';
 import { useUserContext } from '../../../../hooks/useUserContext';
 import { IUserInfo } from '../../../../types/relationship';
@@ -39,17 +40,20 @@ export default function MyInfoPage() {
         {userInfo?.userIntroduction}
       </div>
       <div className={styles.btnWrap}>
-        <div
-          className={styles.btn}
+        <SimpleButton
+          btnTxt={'查看动态'}
           onClick={() => {
             navToPost(userId);
           }}
-        >
-          动态
-        </div>
-        <div className={styles.btn} onClick={navToSubmitMyInfo}>
-          编辑资料
-        </div>
+          width={80}
+          margin="10px"
+        ></SimpleButton>
+        <SimpleButton
+          btnTxt={'编辑资料'}
+          onClick={navToSubmitMyInfo}
+          width={80}
+          margin="10px"
+        ></SimpleButton>
       </div>
     </div>
   );

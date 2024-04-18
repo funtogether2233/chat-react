@@ -58,6 +58,9 @@ export function useNav() {
   const navToAddRelationship = () => {
     nav(routerEnum.addRelationship);
   };
+  const navToInviteGroupMember = () => {
+    nav(routerEnum.inviteGroupMember);
+  };
   const navToSetUpGroup = () => {
     nav(routerEnum.setUpGroupPage);
   };
@@ -92,6 +95,7 @@ export function useNav() {
     navToSubmitMyInfo,
     navToSubmitGroupInfo,
     navToAddRelationship,
+    navToInviteGroupMember,
     navToSetUpGroup,
     navToMessage,
     navToDoc,

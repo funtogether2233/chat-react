@@ -30,6 +30,9 @@ const SubmitGroupInfoPage = React.lazy(
 const AddRelationshipPage = React.lazy(
   () => import('../pages/RelationshipPage/Pages/AddRelationshipPage')
 );
+const InviteGroupMemberPage = React.lazy(
+  () => import('../pages/RelationshipPage/Pages/InviteGroupMemberPage')
+);
 const SetUpGroupPage = React.lazy(
   () => import('../pages/RelationshipPage/Pages/SetUpGroupPage')
 );
@@ -54,6 +57,7 @@ export enum routerNameEnum {
   submitMyInfo = 'submit-my-info',
   submitGroupInfo = 'submit-group-info',
   addRelationship = 'add-relationship',
+  inviteGroupMember = 'inviteGroupMember',
   setUpGroup = 'set-up-group',
   message = 'message',
   doc = 'doc',
@@ -72,6 +76,7 @@ export enum routerEnum {
   submitMyInfo = relationship + '/' + routerNameEnum.submitMyInfo,
   submitGroupInfo = relationship + '/' + routerNameEnum.submitGroupInfo,
   addRelationship = relationship + '/' + routerNameEnum.addRelationship,
+  inviteGroupMember = relationship + '/' + routerNameEnum.inviteGroupMember,
   setUpGroupPage = relationship + '/' + routerNameEnum.setUpGroup,
   message = home + '/' + routerNameEnum.message,
   doc = home + '/' + routerNameEnum.doc,
@@ -117,6 +122,10 @@ export const routes: RouteObject[] = [
           {
             path: routerNameEnum.addRelationship,
             element: <AddRelationshipPage></AddRelationshipPage>
+          },
+          {
+            path: routerNameEnum.inviteGroupMember,
+            element: <InviteGroupMemberPage></InviteGroupMemberPage>
           },
           {
             path: routerNameEnum.setUpGroup,

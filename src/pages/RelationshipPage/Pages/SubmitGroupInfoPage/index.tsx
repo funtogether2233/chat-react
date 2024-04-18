@@ -73,7 +73,7 @@ export default function SubmitGroupInfoPage() {
         />
       </div>
       <div className={styles.inputWrap}>
-        <div className={styles.inputName}>个性签名：</div>
+        <div className={styles.inputName}>群聊简介：</div>
         <input
           ref={groupIntroductionRef}
           className={styles.input}

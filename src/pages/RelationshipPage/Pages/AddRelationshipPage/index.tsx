@@ -101,7 +101,13 @@ export default function AddRelationshipPage() {
       console.error('err', err);
     }
   };
-  const AddFriendBtn = (userId: string, friendId: string) => (
+  const AddFriendBtn = ({
+    userId,
+    friendId
+  }: {
+    userId: string;
+    friendId: string;
+  }) => (
     <SimpleButton
       btnTxt={'加好友'}
       onClick={() => handleAddFriend(userId, friendId)}
@@ -119,7 +125,7 @@ export default function AddRelationshipPage() {
       <FriendItem
         friendshipInfo={friendshipInfo}
         paddingX={100}
-        btnNode={AddFriendBtn(userId, friendId)}
+        btnNode={AddFriendBtn({ userId, friendId })}
         key={friendId}
       ></FriendItem>
     );

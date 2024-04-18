@@ -6,7 +6,8 @@ export default function SimpleButton({
   margin = '',
   borderRadius = 5,
   width = 60,
-  height = 30
+  height = 30,
+  display = true
 }: {
   btnTxt?: string;
   onClick?: () => void;
@@ -14,19 +15,24 @@ export default function SimpleButton({
   borderRadius?: number;
   width?: number;
   height?: number;
+  display?: boolean;
 }) {
   return (
-    <div
-      className={styles.simpleButton}
-      onClick={onClick}
-      style={{
-        margin: margin,
-        borderRadius: `${borderRadius}px`,
-        width: `${width}px`,
-        height: `${height}px`
-      }}
-    >
-      {btnTxt}
-    </div>
+    <>
+      {display ? (
+        <div
+          className={styles.simpleButton}
+          onClick={onClick}
+          style={{
+            margin: margin,
+            borderRadius: `${borderRadius}px`,
+            width: `${width}px`,
+            height: `${height}px`
+          }}
+        >
+          {btnTxt}
+        </div>
+      ) : null}
+    </>
   );
 }

@@ -1,16 +1,32 @@
 import {
+  IAddAdminParam,
+  IAddAdminRes,
   IAddFriendshipParam,
   IAddFriendshipRes,
+  IAddGroupMemberParam,
+  IAddGroupMemberRes,
   IAddGroupParam,
   IAddGroupRes,
+  IChangeOwnerParam,
+  IChangeOwnerRes,
+  IDeleteAdminParam,
+  IDeleteAdminRes,
+  IDeleteFriendshipParam,
+  IDeleteFriendshipRes,
+  IExitGroupParam,
+  IExitGroupRes,
   IGetFriendshipListParam,
   IGetFriendshipListRes,
   IGetGroupInfoParam,
   IGetGroupInfoRes,
   IGetGroupListParam,
   IGetGroupListRes,
+  IGetGroupMemberListParam,
+  IGetGroupMemberListRes,
   IGetUserInfoParam,
   IGetUserInfoRes,
+  IGetUserStatusParam,
+  IGetUserStatusRes,
   ISearchFriendshipListParam,
   ISearchFriendshipListRes,
   ISearchGroupListParam,
@@ -127,6 +143,82 @@ export const updateGroupInfoApi = (
 ): Promise<IUpdateGroupInfoRes> => {
   return request
     .post<IUpdateGroupInfoRes>('/group/update-group-info', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const getGroupMemberListApi = (
+  data: IGetGroupMemberListParam
+): Promise<IGetGroupMemberListRes> => {
+  return request
+    .post<IGetGroupMemberListRes>('/group-member/get-group-member-list', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const getUserStatusApi = (
+  data: IGetUserStatusParam
+): Promise<IGetUserStatusRes> => {
+  return request
+    .post<IGetUserStatusRes>('/group-member/get-user-status', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const addAdminApi = (data: IAddAdminParam): Promise<IAddAdminRes> => {
+  return request
+    .post<IAddAdminRes>('/group-member/add-admin', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const deleteAdminApi = (
+  data: IDeleteAdminParam
+): Promise<IDeleteAdminRes> => {
+  return request
+    .post<IDeleteAdminRes>('/group-member/delete-admin', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const changeOwnerApi = (
+  data: IChangeOwnerParam
+): Promise<IChangeOwnerRes> => {
+  return request
+    .post<IChangeOwnerRes>('/group-member/change-owner', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const exitGroupApi = (data: IExitGroupParam): Promise<IExitGroupRes> => {
+  return request
+    .post<IExitGroupRes>('/group-member/exit-group', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const addGroupMemberApi = (
+  data: IAddGroupMemberParam
+): Promise<IAddGroupMemberRes> => {
+  return request
+    .post<IAddGroupMemberRes>('/group-member/add-group-member', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const deleteFriendApi = (
+  data: IDeleteFriendshipParam
+): Promise<IDeleteFriendshipRes> => {
+  return request
+    .post<IDeleteFriendshipRes>('/friendship/delete-friendship', data)
     .catch((err) => {
       throw new Error(err.message);
     });

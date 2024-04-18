@@ -21,6 +21,7 @@ export default function ChatNav() {
       <div className={styles.navBtn} onClick={() => navToPost()}>
         动态
       </div>
+      <div className={styles.navBtn}>退出</div>
     </div>
   );
 }

@@ -1,4 +1,18 @@
+.userStatus {
+  border-radius: 5px;
+  margin: 5px;
+  padding: 2px 6px;
+  font-size: 12px;
+  background-color: #cecece;
+}
+
 .groupMemberList {
   display: flex;
+  flex-direction: column;
   flex: 1;
+  width: 100%;
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
