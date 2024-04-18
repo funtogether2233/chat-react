@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import { socket } from '../../../../api/socket';
+import SimpleButton from '../../../../components/SimpleButton';
 import { useNav } from '../../../../hooks/useNav';
 import { useUserContext } from '../../../../hooks/useUserContext';
-import { IMessageInfo } from '../../../../types/message';
+import { IMessageInfo } from '../../../../types/chatMessage';
 import Message from '../../components/Message';
 import styles from './GroupChatPage.module.less';
 
@@ -65,9 +66,11 @@ export default function GroupChatPage() {
             setSubContent(e.target.value);
           }}
         ></textarea>
-        <div className={styles.subBtn} onClick={submitContent}>
-          发送
-        </div>
+        <SimpleButton
+          btnTxt={'发送'}
+          onClick={submitContent}
+          margin={'10px'}
+        ></SimpleButton>
       </div>
     </div>
   );

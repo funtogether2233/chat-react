@@ -2,7 +2,9 @@ import React from 'react';
 import { Navigate, RouteObject } from 'react-router-dom';
 
 const LoginPage = React.lazy(() => import('../pages/LoginPage'));
+
 const HomePage = React.lazy(() => import('../pages/HomePage'));
+
 const RelationshipPage = React.lazy(() => import('../pages/RelationshipPage'));
 const FriendChatPage = React.lazy(
   () => import('../pages/RelationshipPage/Pages/FriendChatPage')
@@ -19,8 +21,25 @@ const FriendInfoPage = React.lazy(
 const GroupInfoPage = React.lazy(
   () => import('../pages/RelationshipPage/Pages/GroupInfoPage')
 );
+const SubmitMyInfoPage = React.lazy(
+  () => import('../pages/RelationshipPage/Pages/SubmitMyInfoPage')
+);
+const SubmitGroupInfoPage = React.lazy(
+  () => import('../pages/RelationshipPage/Pages/SubmitGroupInfoPage')
+);
+const AddRelationshipPage = React.lazy(
+  () => import('../pages/RelationshipPage/Pages/AddRelationshipPage')
+);
+const SetUpGroupPage = React.lazy(
+  () => import('../pages/RelationshipPage/Pages/SetUpGroupPage')
+);
+
+const Message = React.lazy(() => import('../pages/MessagePage'));
+
 const DocPage = React.lazy(() => import('../pages/DocPage'));
+
 const PostPage = React.lazy(() => import('../pages/PostPage'));
+
 const NotFoundPage = React.lazy(() => import('../pages/NotFoundPage'));
 
 export enum routerNameEnum {
@@ -32,6 +51,11 @@ export enum routerNameEnum {
   myInfo = 'my-info',
   friendInfo = 'friend-info',
   groupInfo = 'group-info',
+  submitMyInfo = 'submit-my-info',
+  submitGroupInfo = 'submit-group-info',
+  addRelationship = 'add-relationship',
+  setUpGroup = 'set-up-group',
+  message = 'message',
   doc = 'doc',
   post = 'post'
 }
@@ -45,6 +69,11 @@ export enum routerEnum {
   myInfo = relationship + '/' + routerNameEnum.myInfo,
   friendInfo = relationship + '/' + routerNameEnum.friendInfo,
   groupInfo = relationship + '/' + routerNameEnum.groupInfo,
+  submitMyInfo = relationship + '/' + routerNameEnum.submitMyInfo,
+  submitGroupInfo = relationship + '/' + routerNameEnum.submitGroupInfo,
+  addRelationship = relationship + '/' + routerNameEnum.addRelationship,
+  setUpGroupPage = relationship + '/' + routerNameEnum.setUpGroup,
+  message = home + '/' + routerNameEnum.message,
   doc = home + '/' + routerNameEnum.doc,
   post = home + '/' + routerNameEnum.post
 }
@@ -76,9 +105,26 @@ export const routes: RouteObject[] = [
           {
             path: routerNameEnum.groupInfo,
             element: <GroupInfoPage></GroupInfoPage>
+          },
+          {
+            path: routerNameEnum.submitMyInfo,
+            element: <SubmitMyInfoPage></SubmitMyInfoPage>
+          },
+          {
+            path: routerNameEnum.submitGroupInfo,
+            element: <SubmitGroupInfoPage></SubmitGroupInfoPage>
+          },
+          {
+            path: routerNameEnum.addRelationship,
+            element: <AddRelationshipPage></AddRelationshipPage>
+          },
+          {
+            path: routerNameEnum.setUpGroup,
+            element: <SetUpGroupPage></SetUpGroupPage>
           }
         ]
       },
+      { path: routerNameEnum.message, element: <Message></Message> },
       { path: routerNameEnum.doc, element: <DocPage></DocPage> },
       { path: routerNameEnum.post, element: <PostPage></PostPage> }
     ]

@@ -3,11 +3,11 @@ import { relaStateEnum } from '../..';
 import {
   getFriendshipListApi,
   getGroupListApi
-} from '../../../../api/chatList';
+} from '../../../../api/relationship';
 import ListWrap from '../../../../components/ListWrap';
 import { useNav } from '../../../../hooks/useNav';
 import { useUserContext } from '../../../../hooks/useUserContext';
-import { IFriendshipInfo, IGroupInfo } from '../../../../types/chatList';
+import { IFriendshipInfo, IGroupInfo } from '../../../../types/relationship';
 import FriendItem from '../FriendItem';
 import GroupItem from '../GroupItem';
 import styles from './ChatList.module.less';
@@ -24,7 +24,12 @@ export default function ChatList({
   }, []);
 
   const { userId } = useUserContext();
-  const { navToFriendChat, navToGroupChat } = useNav();
+  const {
+    navToFriendChat,
+    navToGroupChat,
+    navToAddRelationship,
+    navToSetUpGroup
+  } = useNav();
 
   const [friendshipListInfo, setFriendshipListInfo] = useState<
     IFriendshipInfo[]
@@ -38,12 +43,12 @@ export default function ChatList({
     }
   };
   const FriendshipList = friendshipListInfo.map((friendshipInfo) => {
-    const { friendId } = friendshipInfo;
+    const { userId } = friendshipInfo;
     return (
       <FriendItem
-        onClick={() => navToFriendChat(friendId)}
-        friendId={friendId}
-        key={friendId}
+        onClick={() => navToFriendChat(userId)}
+        friendshipInfo={friendshipInfo}
+        key={userId}
       ></FriendItem>
     );
   });
@@ -69,7 +74,7 @@ export default function ChatList({
     return (
       <GroupItem
         onClick={() => navToGroupChat(groupId)}
-        groupId={groupId}
+        groupInfo={groupInfo}
         key={groupId}
       ></GroupItem>
     );
@@ -92,8 +97,22 @@ export default function ChatList({
   return (
     <ListWrap>
       <div className={styles.addRelaBar}>
-        <div className={styles.addRelaBtn}>加好友/群</div>
-        <div className={styles.addRelaBtn}>发起群聊</div>
+        <div
+          className={styles.addRelaBtn}
+          onClick={() => {
+            navToAddRelationship();
+          }}
+        >
+          加好友/群
+        </div>
+        <div
+          className={styles.addRelaBtn}
+          onClick={() => {
+            navToSetUpGroup();
+          }}
+        >
+          发起群聊
+        </div>
       </div>
       <div className={styles.relaBtnBar}>
         <div className={styles.relaBtn} onClick={selectFriendState}>

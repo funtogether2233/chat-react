@@ -24,9 +24,11 @@ export function useNav() {
   const navToLogin = () => {
     nav(routerEnum.login);
   };
+
   const navToHome = () => {
     nav(routerEnum.home);
   };
+
   const navToRelationship = () => {
     homeNavNavigate(routerEnum.relationship);
   };
@@ -47,9 +49,27 @@ export function useNav() {
   const navToGroupInfo = () => {
     nav(routerEnum.groupInfo);
   };
+  const navToSubmitMyInfo = () => {
+    nav(routerEnum.submitMyInfo);
+  };
+  const navToSubmitGroupInfo = () => {
+    nav(routerEnum.submitGroupInfo);
+  };
+  const navToAddRelationship = () => {
+    nav(routerEnum.addRelationship);
+  };
+  const navToSetUpGroup = () => {
+    nav(routerEnum.setUpGroupPage);
+  };
+
+  const navToMessage = () => {
+    homeNavNavigate(routerEnum.message);
+  };
+
   const navToDoc = () => {
     homeNavNavigate(routerEnum.doc);
   };
+
   const navToPost = (newPostId = '') => {
     setPostId(newPostId);
     homeNavNavigate(routerEnum.post);
@@ -69,6 +89,11 @@ export function useNav() {
     navToMyInfo,
     navToFriendInfo,
     navToGroupInfo,
+    navToSubmitMyInfo,
+    navToSubmitGroupInfo,
+    navToAddRelationship,
+    navToSetUpGroup,
+    navToMessage,
     navToDoc,
     navToPost,
     authLogin

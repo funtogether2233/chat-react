@@ -1,6 +1,6 @@
 import Avatar from '../../../../components/Avatar';
 import { useUserContext } from '../../../../hooks/useUserContext';
-import { IMessageInfo } from '../../../../types/message';
+import { IMessageInfo } from '../../../../types/chatMessage';
 import { getFormatMessageTime } from '../../../../utils/time';
 import styles from './Message.module.less';
 
