@@ -10,7 +10,9 @@ import {
   ISearchFriendshipListParam,
   ISearchFriendshipListRes,
   ISearchGroupListParam,
-  ISearchGroupListRes
+  ISearchGroupListRes,
+  ISetUpNewGroupParam,
+  ISetUpNewGroupRes
 } from '../types/relationship';
 import { request } from './request';
 
@@ -67,6 +69,16 @@ export const addFriendshipAPI = (
 export const addGroupAPI = (data: IAddGroupParam): Promise<IAddGroupRes> => {
   return request
     .post<IAddGroupRes>('/group-member/add-group', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const setUpNewGroupAPI = (
+  data: ISetUpNewGroupParam
+): Promise<ISetUpNewGroupRes> => {
+  return request
+    .post<ISetUpNewGroupRes>('/group/set-up-new-group', data)
     .catch((err) => {
       throw new Error(err.message);
     });

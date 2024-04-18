@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import {
   addFriendshipAPI,
   addGroupAPI,
@@ -42,6 +43,12 @@ export default function AddRelationshipPage() {
   };
 
   const handleSearch = async () => {
+    if (inputContent === '') {
+      const warnContent = '请输入内容！';
+      console.warn(warnContent);
+      toast.warn(warnContent);
+      return;
+    }
     if (addRelaState === addRelaStateEnum.friend) {
       try {
         const friendshipListRes = await searchFriendshipListApi({
@@ -50,6 +57,7 @@ export default function AddRelationshipPage() {
         console.log(friendshipListRes);
         setFriendListInfo(friendshipListRes.friendshipList);
       } catch (err) {
+        toast.error(String(err));
         console.error('err', err);
       }
     }
@@ -61,6 +69,7 @@ export default function AddRelationshipPage() {
         console.log(groupListRes);
         setGroupListInfo(groupListRes.groupList);
       } catch (err) {
+        toast.error(String(err));
         console.error('err', err);
       }
     }
@@ -72,8 +81,10 @@ export default function AddRelationshipPage() {
         userId,
         friendId
       });
+      toast.success('添加好友成功');
       console.log(addFriendshipRes);
     } catch (err) {
+      toast.error(String(err));
       console.error('err', err);
     }
   };
@@ -83,8 +94,10 @@ export default function AddRelationshipPage() {
         userId,
         groupId
       });
+      toast.success('添加群聊成功');
       console.log(addGroupRes);
     } catch (err) {
+      toast.error(String(err));
       console.error('err', err);
     }
   };

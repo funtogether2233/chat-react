@@ -53,3 +53,11 @@ export interface IAddGroupParam {
 }
 
 export interface IAddGroupRes {}
+
+export interface ISetUpNewGroupParam {
+  userId: string;
+  groupId: string;
+  groupName: string;
+}
+
+export interface ISetUpNewGroupRes {}
