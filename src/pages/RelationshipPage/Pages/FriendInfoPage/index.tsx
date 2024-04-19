@@ -48,7 +48,7 @@ export default function FriendInfoPage() {
 
   return (
     <div className={styles.friendInfoPage}>
-      <Avatar size={100}></Avatar>
+      <Avatar size={100} img={friendInfo?.avatarImg}></Avatar>
       <div className={styles.userName}>{friendInfo?.userName}</div>
       <div className={styles.userId}>{friendInfo?.userId}</div>
       <div className={styles.userIntroduction}>

@@ -60,7 +60,7 @@ export default function GroupInfoDetail({
 
   return (
     <div className={styles.groupInfoDetail}>
-      <Avatar size={100}></Avatar>
+      <Avatar size={100} img={groupInfo?.avatarImg}></Avatar>
       <div className={styles.userName}>{groupInfo?.groupName}</div>
       <div className={styles.userId}>{groupInfo?.groupId}</div>
       <div className={styles.userIntroduction}>

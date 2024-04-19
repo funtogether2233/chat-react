@@ -33,7 +33,7 @@ export default function MyInfoPage() {
 
   return (
     <div className={styles.myInfoPage}>
-      <Avatar size={100}></Avatar>
+      <Avatar size={100} img={userInfo?.avatarImg}></Avatar>
       <div className={styles.userName}>{userInfo?.userName}</div>
       <div className={styles.userId}>{userInfo?.userId}</div>
       <div className={styles.userIntroduction}>

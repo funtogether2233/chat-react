@@ -1,12 +1,32 @@
+import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { getUserInfoApi } from '../../../../api/relationship/user';
 import Avatar from '../../../../components/Avatar';
 import { useNav } from '../../../../hooks/useNav';
 import { useUserContext } from '../../../../hooks/useUserContext';
+import { IUserInfo } from '../../../../types/relationship';
 import styles from './HomeNav.module.less';
 
 export default function ChatNav() {
-  const { initUserContext } = useUserContext();
+  useEffect(() => {
+    init();
+  }, []);
+
+  const { userId, initUserContext } = useUserContext();
   const { navToRelationship, navToMyInfo, navToDoc, navToPost } = useNav();
+  const [userInfo, setUserInfo] = useState<IUserInfo>();
+
+  const init = async () => {
+    try {
+      const userInfoRes = await getUserInfoApi({
+        userId
+      });
+      setUserInfo(userInfoRes);
+    } catch (err) {
+      toast.error(String(err));
+      console.error('err', err);
+    }
+  };
 
   const exit = () => {
     initUserContext();
@@ -15,7 +35,7 @@ export default function ChatNav() {
 
   return (
     <div className={styles.homeNav}>
-      <Avatar onClick={() => navToMyInfo()}></Avatar>
+      <Avatar onClick={() => navToMyInfo()} img={userInfo?.avatarImg}></Avatar>
       <div className={styles.navBtn} onClick={() => navToRelationship()}>
         关系
       </div>

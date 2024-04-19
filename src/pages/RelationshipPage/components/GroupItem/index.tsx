@@ -20,7 +20,7 @@ export default function GroupItem({
     <ListItemWrap onClick={onClick} paddingY={paddingY} paddingX={paddingX}>
       <div className={styles.groupItem}>
         <div className={styles.groupInfo}>
-          <Avatar></Avatar>
+          <Avatar img={groupInfo.avatarImg}></Avatar>
           <div className={styles.groupName}>{groupInfo.groupName}</div>
         </div>
         <div className={styles.btnWrap}>{btnNode}</div>

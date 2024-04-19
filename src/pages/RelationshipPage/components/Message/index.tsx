@@ -11,12 +11,12 @@ export default function Message({
 }) {
   const { userId } = useUserContext();
   const { fromUserInfo, msg, createdTime } = messageInfo;
-  const { userName } = fromUserInfo;
+  const { userName, avatarImg } = fromUserInfo;
   const fromId = fromUserInfo.userId;
 
   return (
     <div className={styles.message}>
-      <Avatar></Avatar>
+      <Avatar img={avatarImg}></Avatar>
       <div className={styles.msgContent}>
         <div className={styles.msgDetail}>
           <div className={styles.userName}>{userName}</div>

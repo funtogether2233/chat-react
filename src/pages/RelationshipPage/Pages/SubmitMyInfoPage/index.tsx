@@ -19,8 +19,10 @@ export default function SubmitMyInfoPage() {
   const [userInfo, setUserInfo] = useState<IUserInfo>();
   const userNameRef = useRef<HTMLInputElement>(null);
   const userIntroductionRef = useRef<HTMLInputElement>(null);
+  const avatarImgRef = useRef<HTMLInputElement>(null);
   const [newUserName, setNewUserName] = useState('');
   const [newUserIntroduction, setNewUserIntroduction] = useState('');
+  const [newAvatarImg, setNewAvatarImg] = useState('');
 
   const init = async () => {
     try {
@@ -30,6 +32,7 @@ export default function SubmitMyInfoPage() {
       setUserInfo(userInfoRes);
       userNameRef.current!.value = userInfoRes.userName;
       userIntroductionRef.current!.value = userInfoRes.userIntroduction;
+      avatarImgRef.current!.value = userInfoRes.avatarImg;
       setNewUserName(userInfoRes.userName);
       setNewUserIntroduction(userInfoRes.userIntroduction);
     } catch (err) {
@@ -39,7 +42,11 @@ export default function SubmitMyInfoPage() {
   };
 
   const updateUserInfo = async () => {
-    if (newUserName === '' || newUserIntroduction === '') {
+    if (
+      newUserName === '' ||
+      newUserIntroduction === '' ||
+      newAvatarImg === ''
+    ) {
       const warnContent = '信息不能为空！';
       console.warn(warnContent);
       toast.warn(warnContent);
@@ -49,7 +56,8 @@ export default function SubmitMyInfoPage() {
       const updateUserInfoRes = await updateUserInfoApi({
         userId,
         userName: newUserName,
-        userIntroduction: newUserIntroduction
+        userIntroduction: newUserIntroduction,
+        avatarImg: newAvatarImg
       });
       console.log(updateUserInfoRes);
       toast.success('更新成功');
@@ -80,6 +88,17 @@ export default function SubmitMyInfoPage() {
           type="text"
           onChange={(e) => {
             setNewUserIntroduction(e.target.value);
+          }}
+        />
+      </div>
+      <div className={styles.inputWrap}>
+        <div className={styles.inputName}>头像链接：</div>
+        <input
+          ref={avatarImgRef}
+          className={styles.input}
+          type="text"
+          onChange={(e) => {
+            setNewAvatarImg(e.target.value);
           }}
         />
       </div>

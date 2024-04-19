@@ -19,8 +19,10 @@ export default function SubmitGroupInfoPage() {
   const [groupInfo, setGroupInfo] = useState<IGroupInfo>();
   const groupNameRef = useRef<HTMLInputElement>(null);
   const groupIntroductionRef = useRef<HTMLInputElement>(null);
+  const avatarImgRef = useRef<HTMLInputElement>(null);
   const [newGroupName, setNewGroupName] = useState('');
   const [newGroupIntroduction, setNewGroupIntroduction] = useState('');
+  const [newAvatarImg, setNewAvatarImg] = useState('');
 
   const init = async () => {
     try {
@@ -30,6 +32,7 @@ export default function SubmitGroupInfoPage() {
       setGroupInfo(groupInfoRes);
       groupNameRef.current!.value = groupInfoRes.groupName;
       groupIntroductionRef.current!.value = groupInfoRes.groupIntroduction;
+      avatarImgRef.current!.value = groupInfoRes.avatarImg;
       setNewGroupName(groupInfoRes.groupName);
       setNewGroupIntroduction(groupInfoRes.groupIntroduction);
     } catch (err) {
@@ -39,7 +42,11 @@ export default function SubmitGroupInfoPage() {
   };
 
   const updateUserInfo = async () => {
-    if (newGroupName === '' || newGroupIntroduction === '') {
+    if (
+      newGroupName === '' ||
+      newGroupIntroduction === '' ||
+      newAvatarImg === ''
+    ) {
       const warnContent = '信息不能为空！';
       console.warn(warnContent);
       toast.warn(warnContent);
@@ -49,7 +56,8 @@ export default function SubmitGroupInfoPage() {
       const updateGroupInfoRes = await updateGroupInfoApi({
         groupId: curGroupId,
         groupName: newGroupName,
-        groupIntroduction: newGroupIntroduction
+        groupIntroduction: newGroupIntroduction,
+        avatarImg: newAvatarImg
       });
       console.log(updateGroupInfoRes);
       toast.success('更新成功');
@@ -80,6 +88,17 @@ export default function SubmitGroupInfoPage() {
           type="text"
           onChange={(e) => {
             setNewGroupIntroduction(e.target.value);
+          }}
+        />
+      </div>
+      <div className={styles.inputWrap}>
+        <div className={styles.inputName}>头像链接：</div>
+        <input
+          ref={avatarImgRef}
+          className={styles.input}
+          type="text"
+          onChange={(e) => {
+            setNewAvatarImg(e.target.value);
           }}
         />
       </div>

@@ -22,7 +22,7 @@ export default function FriendItem({
     <ListItemWrap onClick={onClick} paddingY={paddingY} paddingX={paddingX}>
       <div className={styles.friendItem}>
         <div className={styles.friendInfo}>
-          <Avatar></Avatar>
+          <Avatar img={friendshipInfo.avatarImg}></Avatar>
           <div className={styles.userName}>{friendshipInfo.userName}</div>
           <div className={styles.userStatus}>{userStatusNode}</div>
         </div>

@@ -14,14 +14,14 @@ import styles from './PostPage.module.less';
 import PostItem from './components/PostItem';
 
 export default function PostPage() {
-  useEffect(() => {
-    init();
-    console.log('PostPage');
-  }, []);
-
   const { userId, curPostUserId } = useUserContext();
   const { navToPostDetail } = useNav();
   const [postListInfo, setPostListInfo] = useState<IPostInfo[]>([]);
+
+  useEffect(() => {
+    init();
+    console.log('PostPage');
+  }, [curPostUserId]);
 
   const init = async () => {
     if (curPostUserId === '') {
@@ -38,7 +38,7 @@ export default function PostPage() {
     }
     try {
       const userPostListRes = await getUserPostListApi({
-        userId
+        userId: curPostUserId
       });
       setPostListInfo(userPostListRes.postList);
     } catch (err) {
@@ -89,21 +89,25 @@ export default function PostPage() {
   return (
     <div className={styles.postPage}>
       <div className={styles.postListWrap}>
-        <div className={styles.inputWrap}>
-          <textarea
-            placeholder="请输入动态内容"
-            className={styles.textArea}
-            ref={textAreaRef}
-            onChange={(e) => {
-              setSubContent(e.target.value);
-            }}
-          ></textarea>
-          <SimpleButton
-            btnTxt={'发送'}
-            margin={'10px'}
-            onClick={submitPost}
-          ></SimpleButton>
-        </div>
+        <>
+          {curPostUserId === userId || curPostUserId === '' ? (
+            <div className={styles.inputWrap}>
+              <textarea
+                placeholder="请输入动态内容"
+                className={styles.textArea}
+                ref={textAreaRef}
+                onChange={(e) => {
+                  setSubContent(e.target.value);
+                }}
+              ></textarea>
+              <SimpleButton
+                btnTxt={'发送'}
+                margin={'10px'}
+                onClick={submitPost}
+              ></SimpleButton>
+            </div>
+          ) : null}
+        </>
         <div className={styles.postTitle}>动态</div>
         <div className={styles.postList}>{PostList}</div>
       </div>

@@ -1,6 +1,4 @@
-export interface IFriendshipInfo {
-  userId: string;
-  userName: string;
+export interface IFriendshipInfo extends IUserInfo {
   isFriendship?: boolean;
   isInGroup?: boolean;
 }
@@ -26,6 +24,8 @@ export interface ISearchFriendshipListRes {
 export interface IGroupInfo {
   groupId: string;
   groupName: string;
+  groupIntroduction: string;
+  avatarImg: string;
   isInGroup?: boolean;
 }
 
@@ -72,6 +72,7 @@ export interface IUserInfo {
   userId: string;
   userName: string;
   userIntroduction: string;
+  avatarImg: string;
   userStatus?: userStatusEnum;
 }
 
@@ -80,12 +81,6 @@ export interface IGetUserInfoParam {
 }
 
 export interface IGetUserInfoRes extends IUserInfo {}
-
-export interface IGroupInfo {
-  groupId: string;
-  groupName: string;
-  groupIntroduction: string;
-}
 
 export interface IGetGroupInfoParam {
   groupId: string;

@@ -14,11 +14,12 @@ export default function PostItem({
   const createdTime = postInfo?.createdTime || '0';
   const userInfo = postInfo?.userInfo || null;
   const userName = userInfo?.userName || '';
+  const avatarImg = userInfo?.avatarImg || '';
 
   return (
     <div className={styles.postItem} onClick={onClick}>
       <div className={styles.userInfo}>
-        <Avatar></Avatar>
+        <Avatar img={avatarImg}></Avatar>
         <div className={styles.userName}>{userName}</div>
         <div className={styles.time}>{getFormatMessageTime(createdTime)}</div>
       </div>
