@@ -1,9 +1,17 @@
+import { toast } from 'react-toastify';
 import Avatar from '../../../../components/Avatar';
 import { useNav } from '../../../../hooks/useNav';
+import { useUserContext } from '../../../../hooks/useUserContext';
 import styles from './HomeNav.module.less';
 
 export default function ChatNav() {
+  const { initUserContext } = useUserContext();
   const { navToRelationship, navToMyInfo, navToDoc, navToPost } = useNav();
+
+  const exit = () => {
+    initUserContext();
+    toast.success('成功退出');
+  };
 
   return (
     <div className={styles.homeNav}>
@@ -20,7 +28,14 @@ export default function ChatNav() {
       <div className={styles.navBtn} onClick={() => navToPost()}>
         动态
       </div>
-      <div className={styles.navBtn}>退出</div>
+      <div
+        className={styles.navBtn}
+        onClick={() => {
+          exit();
+        }}
+      >
+        退出
+      </div>
     </div>
   );
 }

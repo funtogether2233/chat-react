@@ -7,6 +7,18 @@ export function useUserContext() {
   const userInfo = userContext!.userInfo;
   const setUserInfo = userContext!.setUserInfo;
 
+  const initUserContext = () => {
+    setUserInfo(() => ({
+      userId: '',
+      curFriendId: '',
+      curGroupId: '',
+      curPostUserId: '',
+      curPostId: '',
+      isLogin: false,
+      homeNavState: routerEnum.home
+    }));
+  };
+
   const setCurFriendId = (newFriendId: string) => {
     setUserInfo((cur) => ({ ...cur, curFriendId: newFriendId }));
   };
@@ -37,6 +49,7 @@ export function useUserContext() {
     curPostId: userInfo.curPostId,
     isLogin: userInfo.isLogin,
     homeNavState: userInfo.homeNavState,
+    initUserContext,
     setCurFriendId,
     setCurGroupId,
     setCurPostUserId,
