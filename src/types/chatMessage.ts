@@ -1,5 +1,7 @@
+import { IUserInfo } from './relationship';
+
 export interface IMessageInfo {
-  fromId: string;
+  fromUserInfo: IUserInfo;
   toId: string;
   msg: string;
   time: number;

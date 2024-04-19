@@ -14,8 +14,8 @@ export default function FriendChatPage() {
   useEffect(() => {
     socket.on('user-message', (data) => {
       console.log('user-message', data);
-      const { fromId, toId, msg, time } = data;
-      setMessageInfoList((cur) => [...cur, { fromId, toId, msg, time }]);
+      const { fromUserInfo, toId, msg, time } = data;
+      setMessageInfoList((cur) => [...cur, { fromUserInfo, toId, msg, time }]);
     });
   }, []);
 
@@ -33,10 +33,10 @@ export default function FriendChatPage() {
       toast.error(String(err));
       console.error('err', err);
     }
+    setMessageInfoList([]);
   };
 
   useEffect(() => {
-    setMessageInfoList([]);
     init();
   }, [curFriendId]);
 
@@ -59,7 +59,8 @@ export default function FriendChatPage() {
   };
 
   const MessageList = messageInfoList.map((messageInfo) => {
-    const { fromId, toId, time } = messageInfo;
+    const { fromUserInfo, toId, time } = messageInfo;
+    const fromId = fromUserInfo.userId;
     if (
       (fromId === userId && toId === curFriendId) ||
       (fromId === curFriendId && toId === userId)

@@ -9,7 +9,8 @@ export default function Message({
 }: {
   messageInfo: IMessageInfo;
 }) {
-  const { fromId, msg, time } = messageInfo;
+  const { fromUserInfo, msg, time } = messageInfo;
+  const fromId = fromUserInfo.userId;
 
   const { userId } = useUserContext();
 

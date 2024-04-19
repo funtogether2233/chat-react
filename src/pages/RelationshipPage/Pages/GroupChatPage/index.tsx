@@ -14,8 +14,8 @@ export default function GroupChatPage() {
   useEffect(() => {
     socket.on('group-message', (data) => {
       console.log('group-message', data);
-      const { fromId, toId, msg, time } = data;
-      setMessageInfoList((cur) => [...cur, { fromId, toId, msg, time }]);
+      const { fromUserInfo, toId, msg, time } = data;
+      setMessageInfoList((cur) => [...cur, { fromUserInfo, toId, msg, time }]);
     });
   }, []);
 
@@ -59,7 +59,8 @@ export default function GroupChatPage() {
   };
 
   const MessageList = messageInfoList.map((messageInfo) => {
-    const { fromId, toId, time } = messageInfo;
+    const { fromUserInfo, toId, time } = messageInfo;
+    const fromId = fromUserInfo.userId;
     if (toId === curGroupId) {
       return <Message messageInfo={messageInfo} key={fromId + time}></Message>;
     }
