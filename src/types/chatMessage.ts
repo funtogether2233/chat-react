@@ -15,3 +15,11 @@ export interface IGetFriendMessageParam {
 export interface IGetFriendMessageRes {
   userMessageList: IMessageInfo[];
 }
+
+export interface IGetGroupMessageParam {
+  toId: string;
+}
+
+export interface IGetGroupMessageRes {
+  userMessageList: IMessageInfo[];
+}

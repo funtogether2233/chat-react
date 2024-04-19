@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
 import { getGroupInfoApi } from '../../../../api/relationship/group';
+import { getGroupMessageApi } from '../../../../api/relationship/message';
 import { socket } from '../../../../api/socket';
 import SimpleButton from '../../../../components/SimpleButton';
 import { useNav } from '../../../../hooks/useNav';
@@ -36,11 +37,19 @@ export default function GroupChatPage() {
       toast.error(String(err));
       console.error('err', err);
     }
+    try {
+      const getFriendMessageRes = await getGroupMessageApi({
+        toId: curGroupId
+      });
+      setMessageInfoList(getFriendMessageRes.userMessageList);
+    } catch (err) {
+      toast.error(String(err));
+      console.error('err', err);
+    }
   };
 
   useEffect(() => {
     socket.emit('join-group', { fromId: userId, toId: curGroupId });
-    setMessageInfoList([]);
     init();
   }, [curGroupId]);
 
