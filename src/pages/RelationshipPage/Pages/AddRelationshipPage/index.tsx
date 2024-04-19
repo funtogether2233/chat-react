@@ -52,7 +52,8 @@ export default function AddRelationshipPage() {
     if (addRelaState === addRelaStateEnum.friend) {
       try {
         const friendshipListRes = await searchFriendshipListApi({
-          userId: inputContent
+          userId: inputContent,
+          friendId: userId
         });
         console.log(friendshipListRes);
         setFriendListInfo(friendshipListRes.friendshipList);
@@ -64,7 +65,8 @@ export default function AddRelationshipPage() {
     if (addRelaState === addRelaStateEnum.group) {
       try {
         const groupListRes = await searchGroupshipListApi({
-          groupId: inputContent
+          groupId: inputContent,
+          userId
         });
         console.log(groupListRes);
         setGroupListInfo(groupListRes.groupList);
@@ -103,40 +105,67 @@ export default function AddRelationshipPage() {
   };
   const AddFriendBtn = ({
     userId,
-    friendId
+    friendId,
+    isFriendship
   }: {
     userId: string;
     friendId: string;
+    isFriendship: boolean;
+  }) => (
+    <>
+      {userId === friendId ? null : (
+        <SimpleButton
+          btnTxt={isFriendship ? '已加好友' : '加好友'}
+          onClick={() =>
+            isFriendship ? null : handleAddFriend(userId, friendId)
+          }
+          width={80}
+        ></SimpleButton>
+      )}
+    </>
+  );
+  const AddGroupBtn = ({
+    userId,
+    groupId,
+    isInGroup
+  }: {
+    userId: string;
+    groupId: string;
+    isInGroup: boolean;
   }) => (
     <SimpleButton
-      btnTxt={'加好友'}
-      onClick={() => handleAddFriend(userId, friendId)}
-    ></SimpleButton>
-  );
-  const AddGroupBtn = (userId: string, groupId: string) => (
-    <SimpleButton
-      btnTxt={'加群'}
-      onClick={() => handleAddGroup(userId, groupId)}
+      btnTxt={isInGroup ? '已加群' : '加群'}
+      onClick={() => (isInGroup ? null : handleAddGroup(userId, groupId))}
+      width={80}
     ></SimpleButton>
   );
   const FriendList = friendListInfo.map((friendshipInfo) => {
     const friendId = friendshipInfo.userId;
+    const { isFriendship } = friendshipInfo;
     return (
       <FriendItem
         friendshipInfo={friendshipInfo}
         paddingX={100}
-        btnNode={AddFriendBtn({ userId, friendId })}
+        btnNode={AddFriendBtn({
+          userId,
+          friendId,
+          isFriendship: isFriendship || false
+        })}
         key={friendId}
       ></FriendItem>
     );
   });
   const GroupList = groupListInfo.map((groupInfo) => {
-    const { groupId } = groupInfo;
+    const { groupId, isInGroup } = groupInfo;
     return (
       <GroupItem
         groupInfo={groupInfo}
         paddingX={100}
-        btnNode={AddGroupBtn(userId, groupId)}
+        btnNode={AddGroupBtn({
+          userId,
+          groupId,
+          isInGroup: isInGroup || false
+        })}
         key={groupId}
       ></GroupItem>
     );

@@ -26,7 +26,8 @@ export default function InviteGroupMemberPage() {
     }
     try {
       const friendshipListRes = await searchFriendshipListApi({
-        userId: inputContent
+        userId: inputContent,
+        groupId: curGroupId
       });
       console.log(friendshipListRes);
       setFriendListInfo(friendshipListRes.friendshipList);
@@ -51,24 +52,31 @@ export default function InviteGroupMemberPage() {
   };
   const AddMemberBtn = ({
     userId,
-    groupId
+    groupId,
+    isInGroup
   }: {
     userId: string;
     groupId: string;
+    isInGroup: boolean;
   }) => (
     <SimpleButton
-      btnTxt={'邀请进群'}
-      onClick={() => handleAddMember(userId, groupId)}
+      btnTxt={isInGroup ? '已在群中' : '邀请进群'}
+      onClick={() => (isInGroup ? null : handleAddMember(userId, groupId))}
       width={80}
     ></SimpleButton>
   );
   const FriendList = friendListInfo.map((friendshipInfo) => {
     const friendId = friendshipInfo.userId;
+    const { isInGroup } = friendshipInfo;
     return (
       <FriendItem
         friendshipInfo={friendshipInfo}
         paddingX={100}
-        btnNode={AddMemberBtn({ userId: friendId, groupId: curGroupId })}
+        btnNode={AddMemberBtn({
+          userId: friendId,
+          groupId: curGroupId,
+          isInGroup: isInGroup || false
+        })}
         key={friendId}
       ></FriendItem>
     );

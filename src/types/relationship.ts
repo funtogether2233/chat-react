@@ -1,6 +1,8 @@
 export interface IFriendshipInfo {
   userId: string;
   userName: string;
+  isFriendship?: boolean;
+  isInGroup?: boolean;
 }
 
 export interface IGetFriendshipListParam {
@@ -13,6 +15,8 @@ export interface IGetFriendshipListRes {
 
 export interface ISearchFriendshipListParam {
   userId: string;
+  friendId?: string;
+  groupId?: string;
 }
 
 export interface ISearchFriendshipListRes {
@@ -22,6 +26,7 @@ export interface ISearchFriendshipListRes {
 export interface IGroupInfo {
   groupId: string;
   groupName: string;
+  isInGroup?: boolean;
 }
 
 export interface IGetGroupListParam {
@@ -34,6 +39,7 @@ export interface IGetGroupListRes {
 
 export interface ISearchGroupListParam {
   groupId: string;
+  userId: string;
 }
 
 export interface ISearchGroupListRes {
