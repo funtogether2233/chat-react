@@ -4,5 +4,14 @@ export interface IMessageInfo {
   fromUserInfo: IUserInfo;
   toId: string;
   msg: string;
-  time: number;
+  createdTime: string;
+}
+
+export interface IGetFriendMessageParam {
+  fromId: string;
+  toId: string;
+}
+
+export interface IGetFriendMessageRes {
+  userMessageList: IMessageInfo[];
 }

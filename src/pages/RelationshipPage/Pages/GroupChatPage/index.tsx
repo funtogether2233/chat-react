@@ -14,8 +14,11 @@ export default function GroupChatPage() {
   useEffect(() => {
     socket.on('group-message', (data) => {
       console.log('group-message', data);
-      const { fromUserInfo, toId, msg, time } = data;
-      setMessageInfoList((cur) => [...cur, { fromUserInfo, toId, msg, time }]);
+      const { fromUserInfo, toId, msg, createdTime } = data;
+      setMessageInfoList((cur) => [
+        ...cur,
+        { fromUserInfo, toId, msg, createdTime }
+      ]);
     });
   }, []);
 
@@ -50,8 +53,7 @@ export default function GroupChatPage() {
     const data = {
       fromId: userId,
       toId: curGroupId,
-      msg: subContent,
-      time: new Date().getTime()
+      msg: subContent
     };
     socket.emit('group-message', data);
     setSubContent('');
@@ -59,10 +61,12 @@ export default function GroupChatPage() {
   };
 
   const MessageList = messageInfoList.map((messageInfo) => {
-    const { fromUserInfo, toId, time } = messageInfo;
+    const { fromUserInfo, toId, createdTime } = messageInfo;
     const fromId = fromUserInfo.userId;
     if (toId === curGroupId) {
-      return <Message messageInfo={messageInfo} key={fromId + time}></Message>;
+      return (
+        <Message messageInfo={messageInfo} key={fromId + createdTime}></Message>
+      );
     }
     return null;
   });

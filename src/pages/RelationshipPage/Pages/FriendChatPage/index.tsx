@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
+import { getFriendMessageApi } from '../../../../api/relationship/message';
 import { getUserInfoApi } from '../../../../api/relationship/user';
 import { socket } from '../../../../api/socket';
 import SimpleButton from '../../../../components/SimpleButton';
@@ -14,8 +15,11 @@ export default function FriendChatPage() {
   useEffect(() => {
     socket.on('user-message', (data) => {
       console.log('user-message', data);
-      const { fromUserInfo, toId, msg, time } = data;
-      setMessageInfoList((cur) => [...cur, { fromUserInfo, toId, msg, time }]);
+      const { fromUserInfo, toId, msg, createdTime } = data;
+      setMessageInfoList((cur) => [
+        ...cur,
+        { fromUserInfo, toId, msg, createdTime }
+      ]);
     });
   }, []);
 
@@ -33,7 +37,16 @@ export default function FriendChatPage() {
       toast.error(String(err));
       console.error('err', err);
     }
-    setMessageInfoList([]);
+    try {
+      const getFriendMessageRes = await getFriendMessageApi({
+        fromId: userId,
+        toId: curFriendId
+      });
+      setMessageInfoList(getFriendMessageRes.userMessageList);
+    } catch (err) {
+      toast.error(String(err));
+      console.error('err', err);
+    }
   };
 
   useEffect(() => {
@@ -49,8 +62,7 @@ export default function FriendChatPage() {
     const data = {
       fromId: userId,
       toId: curFriendId,
-      msg: subContent,
-      time: new Date().getTime()
+      msg: subContent
     };
     socket.emit('user-message', data);
     setSubContent('');
@@ -59,13 +71,23 @@ export default function FriendChatPage() {
   };
 
   const MessageList = messageInfoList.map((messageInfo) => {
-    const { fromUserInfo, toId, time } = messageInfo;
+    const { fromUserInfo, toId, createdTime } = messageInfo;
     const fromId = fromUserInfo.userId;
+    console.log(fromId, toId);
+    console.log(
+      'bool',
+      Boolean(
+        (fromId === userId && toId === curFriendId) ||
+          (fromId === curFriendId && toId === userId)
+      )
+    );
     if (
       (fromId === userId && toId === curFriendId) ||
       (fromId === curFriendId && toId === userId)
     ) {
-      return <Message messageInfo={messageInfo} key={fromId + time}></Message>;
+      return (
+        <Message messageInfo={messageInfo} key={fromId + createdTime}></Message>
+      );
     }
     return null;
   });

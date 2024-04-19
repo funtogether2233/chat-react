@@ -9,18 +9,18 @@ export default function Message({
 }: {
   messageInfo: IMessageInfo;
 }) {
-  const { fromUserInfo, msg, time } = messageInfo;
-  const fromId = fromUserInfo.userId;
-
   const { userId } = useUserContext();
+  const { fromUserInfo, msg, createdTime } = messageInfo;
+  const { userName } = fromUserInfo;
+  const fromId = fromUserInfo.userId;
 
   return (
     <div className={styles.message}>
       <Avatar></Avatar>
       <div className={styles.msgContent}>
         <div className={styles.msgDetail}>
-          <div className={styles.userId}>{fromId}</div>
-          <div className={styles.time}>{getFormatMessageTime(time)}</div>
+          <div className={styles.userName}>{userName}</div>
+          <div className={styles.time}>{getFormatMessageTime(createdTime)}</div>
         </div>
         <div className={styles.bubbleWrap}>
           <div
