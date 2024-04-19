@@ -12,7 +12,8 @@ export default function App() {
     userId: '',
     curFriendId: '',
     curGroupId: '',
-    postId: '',
+    curPostUserId: '',
+    curPostId: '',
     isLogin: false,
     homeNavState: routerEnum.home
   });

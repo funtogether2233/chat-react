@@ -8,7 +8,8 @@ export function useNav() {
     homeNavState,
     setCurFriendId,
     setCurGroupId,
-    setPostId,
+    setCurPostUserId,
+    setCurPostId,
     setHomeNavState
   } = useUserContext();
   const nav = useNavigate();
@@ -73,11 +74,12 @@ export function useNav() {
     homeNavNavigate(routerEnum.doc);
   };
 
-  const navToPost = (newPostId = '') => {
-    setPostId(newPostId);
+  const navToPost = (newPostUserId = '') => {
+    setCurPostUserId(newPostUserId);
     homeNavNavigate(routerEnum.post);
   };
-  const navToPostDetail = () => {
+  const navToPostDetail = (newPostId: string) => {
+    setCurPostId(newPostId);
     nav(routerEnum.postDetail);
   };
 

@@ -15,8 +15,12 @@ export function useUserContext() {
     setUserInfo((cur) => ({ ...cur, curGroupId: newGroupId }));
   };
 
-  const setPostId = (newPostId: string) => {
-    setUserInfo((cur) => ({ ...cur, postId: newPostId }));
+  const setCurPostUserId = (newPostUserId: string) => {
+    setUserInfo((cur) => ({ ...cur, curPostUserId: newPostUserId }));
+  };
+
+  const setCurPostId = (newPostId: string) => {
+    setUserInfo((cur) => ({ ...cur, curPostId: newPostId }));
   };
 
   const setHomeNavState = (newHomeNavState: routerEnum) => {
@@ -29,11 +33,14 @@ export function useUserContext() {
     userId: userInfo.userId,
     curFriendId: userInfo.curFriendId,
     curGroupId: userInfo.curGroupId,
+    curPostUserId: userInfo.curPostUserId,
+    curPostId: userInfo.curPostId,
     isLogin: userInfo.isLogin,
     homeNavState: userInfo.homeNavState,
     setCurFriendId,
     setCurGroupId,
-    setPostId,
+    setCurPostUserId,
+    setCurPostId,
     setHomeNavState
   };
 }

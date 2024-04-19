@@ -5,7 +5,8 @@ export interface IGlobalInfo {
   userId: string;
   curFriendId: string;
   curGroupId: string;
-  postId: string;
+  curPostUserId: string;
+  curPostId: string;
   isLogin: boolean;
   homeNavState: routerEnum;
 }
