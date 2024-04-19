@@ -49,8 +49,23 @@ export default function GroupMemberList({
     }
   };
 
-  const UserStatus = () => {
-    return <div className={styles.userStatus}>{'管理员'}</div>;
+  const UserStatus = ({ memberStatus }: { memberStatus: userStatusEnum }) => {
+    return (
+      <>
+        {isGroupMember(memberStatus) ? null : (
+          <div
+            className={styles.userStatus}
+            style={{
+              backgroundColor: isGroupOwner(memberStatus)
+                ? '#ff8d40'
+                : '#0099ff'
+            }}
+          >
+            {isGroupOwner(memberStatus) ? '群主' : '管理员'}
+          </div>
+        )}
+      </>
+    );
   };
   const GroupMemberBtn = ({
     memberId,
@@ -105,13 +120,13 @@ export default function GroupMemberList({
     };
     const handleExitGroup = async () => {
       try {
-        const changeOwnerRes = await exitGroupApi({
+        const exitGroupRes = await exitGroupApi({
           userId: memberId,
           groupId: curGroupId
         });
         toast.success('已踢出群聊');
         init();
-        console.log(changeOwnerRes);
+        console.log(exitGroupRes);
       } catch (err) {
         toast.error(String(err));
         console.error('err', err);
@@ -139,7 +154,11 @@ export default function GroupMemberList({
           margin="10px"
         ></SimpleButton>
         <SimpleButton
-          display={userId !== memberId && !isGroupMember(userStatus)}
+          display={
+            userId !== memberId &&
+            !isGroupOwner(memberStatus) &&
+            !isGroupMember(userStatus)
+          }
           btnTxt={'踢出群聊'}
           onClick={handleExitGroup}
           width={100}
@@ -152,7 +171,9 @@ export default function GroupMemberList({
     return (
       <FriendItem
         friendshipInfo={groupMemberInfo}
-        userStatusNode={UserStatus()}
+        userStatusNode={UserStatus({
+          memberStatus: groupMemberInfo.userStatus
+        })}
         btnNode={GroupMemberBtn({
           memberId: groupMemberInfo.userId,
           memberStatus: groupMemberInfo.userStatus

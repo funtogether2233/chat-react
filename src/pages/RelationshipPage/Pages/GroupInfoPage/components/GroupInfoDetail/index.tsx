@@ -1,6 +1,9 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { getGroupInfoApi } from '../../../../../../api/relationship';
+import {
+  exitGroupApi,
+  getGroupInfoApi
+} from '../../../../../../api/relationship';
 import Avatar from '../../../../../../components/Avatar';
 import SimpleButton from '../../../../../../components/SimpleButton';
 import { useNav } from '../../../../../../hooks/useNav';
@@ -9,7 +12,10 @@ import {
   IGroupInfo,
   userStatusEnum
 } from '../../../../../../types/relationship';
-import { isGroupMember } from '../../../../../../utils/userStatus';
+import {
+  isGroupMember,
+  isGroupOwner
+} from '../../../../../../utils/userStatus';
 import styles from './GroupInfoDetail.module.less';
 
 export default function GroupInfoDetail({
@@ -21,8 +27,8 @@ export default function GroupInfoDetail({
     init();
   }, []);
 
-  const { curGroupId } = useUserContext();
-  const { navToSubmitGroupInfo, navToInviteGroupMember } = useNav();
+  const { userId, curGroupId } = useUserContext();
+  const { navToHome, navToSubmitGroupInfo, navToInviteGroupMember } = useNav();
   const [groupInfo, setGroupInfo] = useState<IGroupInfo>();
 
   const init = async () => {
@@ -31,6 +37,21 @@ export default function GroupInfoDetail({
         groupId: curGroupId
       });
       setGroupInfo(groupInfoRes);
+    } catch (err) {
+      toast.error(String(err));
+      console.error('err', err);
+    }
+  };
+
+  const handleExitGroup = async () => {
+    try {
+      const exitGroupRes = await exitGroupApi({
+        userId,
+        groupId: curGroupId
+      });
+      toast.success('已退出群聊');
+      navToHome();
+      console.log(exitGroupRes);
     } catch (err) {
       toast.error(String(err));
       console.error('err', err);
@@ -56,6 +77,13 @@ export default function GroupInfoDetail({
         <SimpleButton
           btnTxt={'邀请成员'}
           onClick={navToInviteGroupMember}
+          width={100}
+          margin="10px"
+        ></SimpleButton>
+        <SimpleButton
+          display={!isGroupOwner(userStatus)}
+          btnTxt={'退出群聊'}
+          onClick={handleExitGroup}
           width={100}
           margin="10px"
         ></SimpleButton>
