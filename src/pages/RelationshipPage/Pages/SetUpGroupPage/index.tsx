@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { setUpNewGroupApi } from '../../../../api/relationship';
+import { setUpNewGroupApi } from '../../../../api/relationship/group';
 import SimpleButton from '../../../../components/SimpleButton';
 import { useUserContext } from '../../../../hooks/useUserContext';
 import styles from './SetUpGroupPage.module.less';

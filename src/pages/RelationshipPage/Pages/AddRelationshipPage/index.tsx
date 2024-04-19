@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { addFriendshipApi } from '../../../../api/relationship/friendship';
 import {
-  addFriendshipApi,
   addGroupApi,
-  searchFriendshipListApi,
   searchGroupshipListApi
-} from '../../../../api/relationship';
+} from '../../../../api/relationship/group';
+import { searchFriendshipListApi } from '../../../../api/relationship/user';
 import SimpleButton from '../../../../components/SimpleButton';
 import { useUserContext } from '../../../../hooks/useUserContext';
 import { IFriendshipInfo, IGroupInfo } from '../../../../types/relationship';

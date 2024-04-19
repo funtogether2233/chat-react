@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import {
   exitGroupApi,
   getGroupInfoApi
-} from '../../../../../../api/relationship';
+} from '../../../../../../api/relationship/group';
 import Avatar from '../../../../../../components/Avatar';
 import SimpleButton from '../../../../../../components/SimpleButton';
 import { useNav } from '../../../../../../hooks/useNav';

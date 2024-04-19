@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { getGroupInfoApi } from '../../../../api/relationship';
+import { getGroupInfoApi } from '../../../../api/relationship/group';
 import { socket } from '../../../../api/socket';
 import SimpleButton from '../../../../components/SimpleButton';
 import { useNav } from '../../../../hooks/useNav';

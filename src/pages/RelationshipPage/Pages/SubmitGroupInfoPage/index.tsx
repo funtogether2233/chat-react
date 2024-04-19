@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 import {
   getGroupInfoApi,
   updateGroupInfoApi
-} from '../../../../api/relationship';
+} from '../../../../api/relationship/group';
 import SimpleButton from '../../../../components/SimpleButton';
 import { useUserContext } from '../../../../hooks/useUserContext';
 import { IGroupInfo } from '../../../../types/relationship';

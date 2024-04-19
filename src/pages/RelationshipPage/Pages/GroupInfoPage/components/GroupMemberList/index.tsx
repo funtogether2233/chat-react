@@ -6,7 +6,7 @@ import {
   deleteAdminApi,
   exitGroupApi,
   getGroupMemberListApi
-} from '../../../../../../api/relationship';
+} from '../../../../../../api/relationship/group';
 import SimpleButton from '../../../../../../components/SimpleButton';
 import { useNav } from '../../../../../../hooks/useNav';
 import { useUserContext } from '../../../../../../hooks/useUserContext';

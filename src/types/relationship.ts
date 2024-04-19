@@ -66,7 +66,7 @@ export interface IUserInfo {
   userId: string;
   userName: string;
   userIntroduction: string;
-  userStatus: userStatusEnum;
+  userStatus?: userStatusEnum;
 }
 
 export interface IGetUserInfoParam {

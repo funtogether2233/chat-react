@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { deleteFriendApi, getUserInfoApi } from '../../../../api/relationship';
+import { deleteFriendApi } from '../../../../api/relationship/friendship';
+import { getUserInfoApi } from '../../../../api/relationship/user';
 import Avatar from '../../../../components/Avatar';
 import SimpleButton from '../../../../components/SimpleButton';
 import { useNav } from '../../../../hooks/useNav';

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
-import { getUserStatusApi } from '../../../../api/relationship';
+import { getUserStatusApi } from '../../../../api/relationship/user';
 import { useUserContext } from '../../../../hooks/useUserContext';
 import { userStatusEnum } from '../../../../types/relationship';
 import styles from './GroupInfoPage.module.less';

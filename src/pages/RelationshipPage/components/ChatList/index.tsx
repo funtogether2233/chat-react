@@ -1,9 +1,7 @@
 import { useEffect, useState } from 'react';
 import { relaStateEnum } from '../..';
-import {
-  getFriendshipListApi,
-  getGroupListApi
-} from '../../../../api/relationship';
+import { getFriendshipListApi } from '../../../../api/relationship/friendship';
+import { getGroupListApi } from '../../../../api/relationship/group';
 import ListWrap from '../../../../components/ListWrap';
 import { useNav } from '../../../../hooks/useNav';
 import { useUserContext } from '../../../../hooks/useUserContext';
