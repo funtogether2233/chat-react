@@ -36,7 +36,6 @@ export default function GroupMemberList({
   }, [curGroupId]);
 
   const init = async () => {
-    console.error('init');
     try {
       const groupMemberListRes = await getGroupMemberListApi({
         groupId: curGroupId
