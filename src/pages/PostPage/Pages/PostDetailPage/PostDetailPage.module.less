@@ -1,0 +1,60 @@
+.postDetailPage {
+  display: flex;
+  justify-content: center;
+  width: 50%;
+
+  .postDetailWrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    overflow: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .inputWrap {
+      display: flex;
+      align-items: center;
+      margin: 10px 0;
+      border-radius: 10px;
+      padding: 10px;
+      width: 100%;
+      background-color: #fff;
+
+      .input {
+        flex: 1;
+        border: 0;
+        border-radius: 10px;
+        padding: 20px;
+        height: 30px;
+        font-size: 16px;
+        outline: 0;
+      }
+    }
+
+    .messageTitle {
+      display: flex;
+      justify-content: flex-start;
+      border-bottom: 3px solid #e9e9e9;
+      width: 100%;
+      color: #cecece;
+    }
+
+    .postMessageList {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      width: 100%;
+      overflow: auto;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+
+      .messageBtmTxt {
+        color: #cecece;
+      }
+    }
+  }
+}

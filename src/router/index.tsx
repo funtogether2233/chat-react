@@ -42,6 +42,9 @@ const Message = React.lazy(() => import('../pages/MessagePage'));
 const DocPage = React.lazy(() => import('../pages/DocPage'));
 
 const PostPage = React.lazy(() => import('../pages/PostPage'));
+const PostDetailPage = React.lazy(
+  () => import('../pages/PostPage/Pages/PostDetailPage')
+);
 
 const NotFoundPage = React.lazy(() => import('../pages/NotFoundPage'));
 
@@ -61,7 +64,8 @@ export enum routerNameEnum {
   setUpGroup = 'set-up-group',
   message = 'message',
   doc = 'doc',
-  post = 'post'
+  post = 'post',
+  postDetail = 'postDetail'
 }
 
 export enum routerEnum {
@@ -80,7 +84,8 @@ export enum routerEnum {
   setUpGroupPage = relationship + '/' + routerNameEnum.setUpGroup,
   message = home + '/' + routerNameEnum.message,
   doc = home + '/' + routerNameEnum.doc,
-  post = home + '/' + routerNameEnum.post
+  post = home + '/' + routerNameEnum.post,
+  postDetail = post + '/' + routerNameEnum.postDetail
 }
 
 export const routes: RouteObject[] = [
@@ -135,7 +140,16 @@ export const routes: RouteObject[] = [
       },
       { path: routerNameEnum.message, element: <Message></Message> },
       { path: routerNameEnum.doc, element: <DocPage></DocPage> },
-      { path: routerNameEnum.post, element: <PostPage></PostPage> }
+      {
+        path: routerNameEnum.post,
+        element: <PostPage></PostPage>,
+        children: [
+          {
+            path: routerNameEnum.postDetail,
+            element: <PostDetailPage></PostDetailPage>
+          }
+        ]
+      }
     ]
   },
   { path: '*', element: <NotFoundPage></NotFoundPage> }

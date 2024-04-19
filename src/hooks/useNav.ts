@@ -77,6 +77,9 @@ export function useNav() {
     setPostId(newPostId);
     homeNavNavigate(routerEnum.post);
   };
+  const navToPostDetail = () => {
+    nav(routerEnum.postDetail);
+  };
 
   const authLogin = () => {
     if (!isLogin) {
@@ -100,6 +103,7 @@ export function useNav() {
     navToMessage,
     navToDoc,
     navToPost,
+    navToPostDetail,
     authLogin
   };
 }
