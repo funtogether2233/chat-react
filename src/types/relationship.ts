@@ -148,6 +148,13 @@ export interface IExitGroupParam {
 
 export interface IExitGroupRes {}
 
+export interface IDisbandGroupParam {
+  userId: string;
+  groupId: string;
+}
+
+export interface IDisbandGroupRes {}
+
 export interface IAddGroupMemberParam {
   userId: string;
   groupId: string;

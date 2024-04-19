@@ -44,6 +44,7 @@ export default function InviteGroupMemberPage() {
         groupId
       });
       toast.success('添加群成员成功');
+      handleSearch();
       console.log(addMemberRes);
     } catch (err) {
       toast.error(String(err));

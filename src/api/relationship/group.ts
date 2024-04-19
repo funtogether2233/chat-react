@@ -9,6 +9,8 @@ import {
   IChangeOwnerRes,
   IDeleteAdminParam,
   IDeleteAdminRes,
+  IDisbandGroupParam,
+  IDisbandGroupRes,
   IExitGroupParam,
   IExitGroupRes,
   IGetGroupInfoParam,
@@ -61,6 +63,16 @@ export const updateGroupInfoApi = (
 ): Promise<IUpdateGroupInfoRes> => {
   return request
     .post<IUpdateGroupInfoRes>('/group/update-group-info', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const disbandGroupApi = (
+  data: IDisbandGroupParam
+): Promise<IDisbandGroupRes> => {
+  return request
+    .post<IDisbandGroupRes>('/group/disband-group', data)
     .catch((err) => {
       throw new Error(err.message);
     });

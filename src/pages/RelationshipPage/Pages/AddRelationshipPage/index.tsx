@@ -84,6 +84,7 @@ export default function AddRelationshipPage() {
         friendId
       });
       toast.success('添加好友成功');
+      handleSearch();
       console.log(addFriendshipRes);
     } catch (err) {
       toast.error(String(err));
@@ -97,6 +98,7 @@ export default function AddRelationshipPage() {
         groupId
       });
       toast.success('添加群聊成功');
+      handleSearch();
       console.log(addGroupRes);
     } catch (err) {
       toast.error(String(err));

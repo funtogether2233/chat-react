@@ -27,7 +27,7 @@ export function useNav() {
   };
 
   const navToHome = () => {
-    nav(routerEnum.home);
+    homeNavNavigate(routerEnum.home, false);
   };
 
   const navToRelationship = () => {

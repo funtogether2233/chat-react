@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
+  disbandGroupApi,
   exitGroupApi,
   getGroupInfoApi
 } from '../../../../../../api/relationship/group';
@@ -58,6 +59,21 @@ export default function GroupInfoDetail({
     }
   };
 
+  const handleDisbandGroup = async () => {
+    try {
+      const exitGroupRes = await disbandGroupApi({
+        userId,
+        groupId: curGroupId
+      });
+      toast.success('已解散群聊');
+      navToHome();
+      console.log(exitGroupRes);
+    } catch (err) {
+      toast.error(String(err));
+      console.error('err', err);
+    }
+  };
+
   return (
     <div className={styles.groupInfoDetail}>
       <Avatar size={100} img={groupInfo?.avatarImg}></Avatar>
@@ -84,6 +100,13 @@ export default function GroupInfoDetail({
           display={!isGroupOwner(userStatus)}
           btnTxt={'退出群聊'}
           onClick={handleExitGroup}
+          width={100}
+          margin="10px"
+        ></SimpleButton>
+        <SimpleButton
+          display={isGroupOwner(userStatus)}
+          btnTxt={'解散群聊'}
+          onClick={handleDisbandGroup}
           width={100}
           margin="10px"
         ></SimpleButton>
