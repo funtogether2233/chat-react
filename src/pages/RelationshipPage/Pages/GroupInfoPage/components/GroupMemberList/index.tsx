@@ -167,15 +167,16 @@ export default function GroupMemberList({
     );
   };
   const GroupMemberList = newGroupMemberList.map((groupMemberInfo) => {
+    const memberStatus = groupMemberInfo?.userStatus || userStatusEnum.member;
     return (
       <FriendItem
         friendshipInfo={groupMemberInfo}
         userStatusNode={UserStatus({
-          memberStatus: groupMemberInfo.userStatus
+          memberStatus
         })}
         btnNode={GroupMemberBtn({
           memberId: groupMemberInfo.userId,
-          memberStatus: groupMemberInfo.userStatus
+          memberStatus
         })}
         key={groupMemberInfo.userId}
       ></FriendItem>
