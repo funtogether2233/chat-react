@@ -10,7 +10,9 @@ export default function DocPage() {
 
   return (
     <div className={styles.docPage}>
-      <ListWrap></ListWrap>
+      <ListWrap>
+        <div className={styles.testDoc}>测试文档</div>
+      </ListWrap>
       <DocContent></DocContent>
     </div>
   );
