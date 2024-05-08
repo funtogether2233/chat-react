@@ -1,4 +1,4 @@
-import { userStatusEnum } from '../types/relationship';
+import { userMuteEnum, userStatusEnum } from '../types/relationship';
 
 export const isGroupOwner = (userStatus: userStatusEnum) => {
   if (userStatus === userStatusEnum.owner) {
@@ -19,4 +19,8 @@ export const isGroupMember = (userStatus: userStatusEnum) => {
     return true;
   }
   return false;
+};
+
+export const isMuteMember = (isMute: number) => {
+  return isMute === userMuteEnum.isMute;
 };

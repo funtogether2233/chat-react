@@ -2,8 +2,10 @@ import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
 import {
   addAdminApi,
+  addMuteApi,
   changeOwnerApi,
   deleteAdminApi,
+  deleteMuteApi,
   exitGroupApi,
   getGroupMemberListApi
 } from '../../../../../../api/relationship/group';
@@ -17,7 +19,8 @@ import {
 import {
   isGroupAdmin,
   isGroupMember,
-  isGroupOwner
+  isGroupOwner,
+  isMuteMember
 } from '../../../../../../utils/userStatus';
 import FriendItem from '../../../../components/FriendItem';
 import styles from './GroupMemberList.module.less';
@@ -68,10 +71,12 @@ export default function GroupMemberList({
   };
   const GroupMemberBtn = ({
     memberId,
-    memberStatus
+    memberStatus,
+    isMute
   }: {
     memberId: string;
     memberStatus: userStatusEnum;
+    isMute: number;
   }) => {
     const handleAdmin = async () => {
       if (isGroupAdmin(memberStatus)) {
@@ -117,6 +122,35 @@ export default function GroupMemberList({
         console.error('err', err);
       }
     };
+    const handleMute = async () => {
+      if (isMuteMember(isMute)) {
+        try {
+          const addAdminRes = await deleteMuteApi({
+            userId: memberId,
+            groupId: curGroupId
+          });
+          toast.success('已解除禁言');
+          init();
+          console.log(addAdminRes);
+        } catch (err) {
+          toast.error(String(err));
+          console.error('err', err);
+        }
+      } else {
+        try {
+          const addAdminRes = await addMuteApi({
+            userId: memberId,
+            groupId: curGroupId
+          });
+          toast.success('已禁言');
+          init();
+          console.log(addAdminRes);
+        } catch (err) {
+          toast.error(String(err));
+          console.error('err', err);
+        }
+      }
+    };
     const handleExitGroup = async () => {
       try {
         const exitGroupRes = await exitGroupApi({
@@ -142,7 +176,7 @@ export default function GroupMemberList({
           }
           btnTxt={'转让群主'}
           onClick={handleOwner}
-          width={100}
+          width={80}
           margin="10px"
         ></SimpleButton>
         <SimpleButton
@@ -155,12 +189,23 @@ export default function GroupMemberList({
         <SimpleButton
           display={
             userId !== memberId &&
+            isGroupMember(memberStatus) &&
+            !isGroupMember(userStatus)
+          }
+          btnTxt={isMuteMember(isMute) ? '解除禁言' : '禁言'}
+          onClick={handleMute}
+          width={isMuteMember(isMute) ? 80 : 40}
+          margin="10px"
+        ></SimpleButton>
+        <SimpleButton
+          display={
+            userId !== memberId &&
             !isGroupOwner(memberStatus) &&
             !isGroupMember(userStatus)
           }
           btnTxt={'踢出群聊'}
           onClick={handleExitGroup}
-          width={100}
+          width={80}
           margin="10px"
         ></SimpleButton>
       </>
@@ -168,6 +213,7 @@ export default function GroupMemberList({
   };
   const GroupMemberList = newGroupMemberList.map((groupMemberInfo) => {
     const memberStatus = groupMemberInfo?.userStatus || userStatusEnum.member;
+    const isMute = groupMemberInfo?.isMute || 0;
     return (
       <FriendItem
         friendshipInfo={groupMemberInfo}
@@ -176,7 +222,8 @@ export default function GroupMemberList({
         })}
         btnNode={GroupMemberBtn({
           memberId: groupMemberInfo.userId,
-          memberStatus
+          memberStatus,
+          isMute
         })}
         key={groupMemberInfo.userId}
       ></FriendItem>

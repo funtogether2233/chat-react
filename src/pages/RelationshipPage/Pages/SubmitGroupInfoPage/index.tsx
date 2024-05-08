@@ -35,6 +35,7 @@ export default function SubmitGroupInfoPage() {
       avatarImgRef.current!.value = groupInfoRes.avatarImg;
       setNewGroupName(groupInfoRes.groupName);
       setNewGroupIntroduction(groupInfoRes.groupIntroduction);
+      setNewAvatarImg(groupInfoRes.avatarImg);
     } catch (err) {
       toast.error(String(err));
       console.error('err', err);

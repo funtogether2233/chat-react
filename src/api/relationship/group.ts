@@ -5,10 +5,14 @@ import {
   IAddGroupMemberRes,
   IAddGroupParam,
   IAddGroupRes,
+  IAddMuteParam,
+  IAddMuteRes,
   IChangeOwnerParam,
   IChangeOwnerRes,
   IDeleteAdminParam,
   IDeleteAdminRes,
+  IDeleteMuteParam,
+  IDeleteMuteRes,
   IDisbandGroupParam,
   IDisbandGroupRes,
   IExitGroupParam,
@@ -19,6 +23,8 @@ import {
   IGetGroupListRes,
   IGetGroupMemberListParam,
   IGetGroupMemberListRes,
+  IGetUserMuteParam,
+  IGetUserMuteRes,
   ISearchGroupListParam,
   ISearchGroupListRes,
   ISetUpNewGroupParam,
@@ -147,6 +153,34 @@ export const deleteAdminApi = (
 ): Promise<IDeleteAdminRes> => {
   return request
     .post<IDeleteAdminRes>('/group-member/delete-admin', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const getUserMuteApi = (
+  data: IGetUserMuteParam
+): Promise<IGetUserMuteRes> => {
+  return request
+    .post<IGetUserMuteRes>('/group-member/get-user-mute', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const addMuteApi = (data: IAddMuteParam): Promise<IAddMuteRes> => {
+  return request
+    .post<IAddMuteRes>('/group-member/add-mute', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const deleteMuteApi = (
+  data: IDeleteMuteParam
+): Promise<IDeleteMuteRes> => {
+  return request
+    .post<IDeleteMuteRes>('/group-member/delete-mute', data)
     .catch((err) => {
       throw new Error(err.message);
     });

@@ -74,6 +74,7 @@ export interface IUserInfo {
   userIntroduction: string;
   avatarImg: string;
   userStatus?: userStatusEnum;
+  isMute?: number;
 }
 
 export interface IGetUserInfoParam {
@@ -141,6 +142,29 @@ export interface IChangeOwnerParam {
 
 export interface IChangeOwnerRes {}
 
+export interface IAddMuteParam {
+  userId: string;
+  groupId: string;
+}
+
+export interface IAddMuteRes {}
+
+export interface IDeleteMuteParam {
+  userId: string;
+  groupId: string;
+}
+
+export interface IDeleteMuteRes {}
+
+export interface IGetUserMuteParam {
+  userId: string;
+  groupId: string;
+}
+
+export interface IGetUserMuteRes {
+  isMute: number;
+}
+
 export interface IExitGroupParam {
   userId: string;
   groupId: string;
@@ -168,3 +192,8 @@ export interface IDeleteFriendshipParam {
 }
 
 export interface IDeleteFriendshipRes {}
+
+export enum userMuteEnum {
+  isMute = 1,
+  isNotMute = 0
+}

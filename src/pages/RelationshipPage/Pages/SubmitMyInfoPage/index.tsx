@@ -35,6 +35,7 @@ export default function SubmitMyInfoPage() {
       avatarImgRef.current!.value = userInfoRes.avatarImg;
       setNewUserName(userInfoRes.userName);
       setNewUserIntroduction(userInfoRes.userIntroduction);
+      setNewAvatarImg(userInfoRes.avatarImg);
     } catch (err) {
       toast.error(String(err));
       console.error('err', err);
