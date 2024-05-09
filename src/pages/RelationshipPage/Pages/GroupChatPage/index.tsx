@@ -30,7 +30,7 @@ export default function GroupChatPage() {
   const { userId, curGroupId } = useUserContext();
   const { navToGroupInfo } = useNav();
   const [groupInfo, setGroupInfo] = useState<IGroupInfo>();
-  const [userIsMute, setUserIsMute] = useState<number>();
+  const [userIsMute, setUserIsMute] = useState(0);
 
   const init = async () => {
     try {
@@ -104,7 +104,7 @@ export default function GroupChatPage() {
       </div>
       <div className={styles.groupMsg}>{MessageList}</div>
       <div className={styles.inputWrap}>
-        {!isMuteMember(userIsMute || 0) ? (
+        {!isMuteMember(userIsMute) ? (
           <>
             <textarea
               placeholder="请输入消息内容"

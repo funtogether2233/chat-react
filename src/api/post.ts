@@ -3,6 +3,10 @@ import {
   IAddPostMessageRes,
   IAddPostParam,
   IAddPostRes,
+  IDeletePostMessageParam,
+  IDeletePostMessageRes,
+  IDeletePostParam,
+  IDeletePostRes,
   IGetAllPostListParam,
   IGetAllPostListRes,
   IGetPostDetailParam,
@@ -48,11 +52,31 @@ export const addPostApi = (data: IAddPostParam): Promise<IAddPostRes> => {
   });
 };
 
+export const deletePostApi = (
+  data: IDeletePostParam
+): Promise<IDeletePostRes> => {
+  return request
+    .post<IDeletePostRes>('/post/delete-post', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
 export const addPostMessageApi = (
   data: IAddPostMessageParam
 ): Promise<IAddPostMessageRes> => {
   return request
     .post<IAddPostMessageRes>('/post-message/create-post-message', data)
+    .catch((err) => {
+      throw new Error(err.message);
+    });
+};
+
+export const deletePostMessageApi = (
+  data: IDeletePostMessageParam
+): Promise<IDeletePostMessageRes> => {
+  return request
+    .post<IDeletePostMessageRes>('/post-message/delete-post-message', data)
     .catch((err) => {
       throw new Error(err.message);
     });

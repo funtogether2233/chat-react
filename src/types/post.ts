@@ -1,6 +1,7 @@
 import { IUserInfo } from './relationship';
 
 export interface IPostItemInfo {
+  id: number;
   userId: string;
   content: string;
   createdTime: string;
@@ -16,7 +17,9 @@ export interface IPostInfo {
 }
 
 export interface IPostMessageInfo {
+  id: number;
   postId: string;
+  postUserId: string;
   userId: string;
   content: string;
   createdTime: string;
@@ -61,6 +64,12 @@ export interface IAddPostRes {
   postId: string;
 }
 
+export interface IDeletePostParam {
+  postId: string;
+}
+
+export interface IDeletePostRes {}
+
 export interface IAddPostMessageParam {
   postId: string;
   userId: string;
@@ -68,3 +77,9 @@ export interface IAddPostMessageParam {
 }
 
 export interface IAddPostMessageRes {}
+
+export interface IDeletePostMessageParam {
+  postMessageId: string;
+}
+
+export interface IDeletePostMessageRes {}

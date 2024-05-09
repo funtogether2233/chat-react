@@ -1,4 +1,8 @@
-import { userMuteEnum, userStatusEnum } from '../types/relationship';
+import {
+  postPermissionEnum,
+  userMuteEnum,
+  userStatusEnum
+} from '../types/relationship';
 
 export const isGroupOwner = (userStatus: userStatusEnum) => {
   if (userStatus === userStatusEnum.owner) {
@@ -23,4 +27,8 @@ export const isGroupMember = (userStatus: userStatusEnum) => {
 
 export const isMuteMember = (isMute: number) => {
   return isMute === userMuteEnum.isMute;
+};
+
+export const hasPostPermission = (postPermission: number) => {
+  return postPermission === postPermissionEnum.hasPostPermission;
 };

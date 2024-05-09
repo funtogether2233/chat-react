@@ -36,6 +36,8 @@ export default function PostDetailPage() {
       <PostItem
         postInfo={postMessageInfo}
         key={postMessageInfo.userId + postMessageInfo.createdTime}
+        init={init}
+        type={'postMessage'}
       ></PostItem>
     );
   });

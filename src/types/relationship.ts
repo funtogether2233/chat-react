@@ -197,3 +197,40 @@ export enum userMuteEnum {
   isMute = 1,
   isNotMute = 0
 }
+
+export enum postPermissionEnum {
+  hasPostPermission = 1,
+  netHasPostPermission = 0
+}
+
+export interface IGetUserPostPermissionParam {
+  userId: string;
+  friendId: string;
+}
+
+export interface IGetUserPostPermissionRes {
+  postPermission: number;
+}
+
+export interface IGetFriendPostPermissionParam {
+  userId: string;
+  friendId: string;
+}
+
+export interface IGetFriendPostPermissionRes {
+  postPermission: number;
+}
+
+export interface IAllowPostPermissionParam {
+  userId: string;
+  friendId: string;
+}
+
+export interface IAllowPostPermissionRes {}
+
+export interface IBanPostPermissionParam {
+  userId: string;
+  friendId: string;
+}
+
+export interface IBanPostPermissionRes {}
