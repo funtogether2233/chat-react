@@ -40,11 +40,19 @@ const SetUpGroupPage = React.lazy(
 const Message = React.lazy(() => import('../pages/MessagePage'));
 
 const DocPage = React.lazy(() => import('../pages/DocPage'));
+const DocInfoPage = React.lazy(
+  () => import('../pages/DocPage/Pages/DocInfoPage')
+);
+const SubmitDocInfoPage = React.lazy(
+  () => import('../pages/DocPage/Pages/SubmitDocInfoPage')
+);
 
 const PostPage = React.lazy(() => import('../pages/PostPage'));
 const PostDetailPage = React.lazy(
   () => import('../pages/PostPage/Pages/PostDetailPage')
 );
+
+const CollaDocPage = React.lazy(() => import('../pages/CollaDocPage'));
 
 const NotFoundPage = React.lazy(() => import('../pages/NotFoundPage'));
 
@@ -64,8 +72,11 @@ export enum routerNameEnum {
   setUpGroup = 'set-up-group',
   message = 'message',
   doc = 'doc',
+  docInfo = 'docInfo',
+  submitDocInfo = 'submitDocInfo',
   post = 'post',
-  postDetail = 'postDetail'
+  postDetail = 'postDetail',
+  collaDoc = 'collaDoc'
 }
 
 export enum routerEnum {
@@ -84,8 +95,11 @@ export enum routerEnum {
   setUpGroupPage = relationship + '/' + routerNameEnum.setUpGroup,
   message = home + '/' + routerNameEnum.message,
   doc = home + '/' + routerNameEnum.doc,
+  docInfo = doc + '/' + routerNameEnum.docInfo,
+  submitDocInfo = doc + '/' + routerNameEnum.submitDocInfo,
   post = home + '/' + routerNameEnum.post,
-  postDetail = post + '/' + routerNameEnum.postDetail
+  postDetail = post + '/' + routerNameEnum.postDetail,
+  collaDoc = '/' + routerNameEnum.collaDoc
 }
 
 export const routes: RouteObject[] = [
@@ -139,7 +153,20 @@ export const routes: RouteObject[] = [
         ]
       },
       { path: routerNameEnum.message, element: <Message></Message> },
-      { path: routerNameEnum.doc, element: <DocPage></DocPage> },
+      {
+        path: routerNameEnum.doc,
+        element: <DocPage></DocPage>,
+        children: [
+          {
+            path: routerNameEnum.docInfo,
+            element: <DocInfoPage></DocInfoPage>
+          },
+          {
+            path: routerNameEnum.submitDocInfo,
+            element: <SubmitDocInfoPage></SubmitDocInfoPage>
+          }
+        ]
+      },
       {
         path: routerNameEnum.post,
         element: <PostPage></PostPage>,
@@ -151,6 +178,10 @@ export const routes: RouteObject[] = [
         ]
       }
     ]
+  },
+  {
+    path: routerNameEnum.collaDoc,
+    element: <CollaDocPage></CollaDocPage>
   },
   { path: '*', element: <NotFoundPage></NotFoundPage> }
 ];

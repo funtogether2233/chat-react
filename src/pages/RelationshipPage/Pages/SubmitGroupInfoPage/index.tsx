@@ -5,6 +5,7 @@ import {
   updateGroupInfoApi
 } from '../../../../api/relationship/group';
 import SimpleButton from '../../../../components/SimpleButton';
+import { useNav } from '../../../../hooks/useNav';
 import { useUserContext } from '../../../../hooks/useUserContext';
 import { IGroupInfo } from '../../../../types/relationship';
 import styles from './SubmitGroupInfoPage.module.less';
@@ -16,6 +17,7 @@ export default function SubmitGroupInfoPage() {
   }, []);
 
   const { curGroupId } = useUserContext();
+  const { navToGroupInfo } = useNav();
   const [groupInfo, setGroupInfo] = useState<IGroupInfo>();
   const groupNameRef = useRef<HTMLInputElement>(null);
   const groupIntroductionRef = useRef<HTMLInputElement>(null);
@@ -61,6 +63,7 @@ export default function SubmitGroupInfoPage() {
         avatarImg: newAvatarImg
       });
       console.log(updateGroupInfoRes);
+      navToGroupInfo();
       toast.success('更新成功');
     } catch (err) {
       toast.error(String(err));
@@ -106,7 +109,7 @@ export default function SubmitGroupInfoPage() {
       <SimpleButton
         btnTxt={'更新信息'}
         onClick={updateUserInfo}
-        width={100}
+        width={80}
         margin="20px"
       ></SimpleButton>
     </div>

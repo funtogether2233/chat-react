@@ -5,6 +5,7 @@ export interface IGlobalInfo {
   userId: string;
   curFriendId: string;
   curGroupId: string;
+  curDocId: string;
   curPostUserId: string;
   curPostId: string;
   isLogin: boolean;

@@ -6,8 +6,10 @@ export function useNav() {
   const {
     isLogin,
     homeNavState,
+    curDocId,
     setCurFriendId,
     setCurGroupId,
+    setCurDocId,
     setCurPostUserId,
     setCurPostId,
     setHomeNavState
@@ -35,35 +37,35 @@ export function useNav() {
   };
   const navToFriendChat = (newFriendId: string) => {
     setCurFriendId(newFriendId);
-    nav(routerEnum.friendChat);
+    homeNavNavigate(routerEnum.friendChat);
   };
   const navToGroupChat = (newGroupId: string) => {
     setCurGroupId(newGroupId);
-    nav(routerEnum.groupChat);
+    homeNavNavigate(routerEnum.groupChat);
   };
   const navToMyInfo = () => {
     homeNavNavigate(routerEnum.myInfo, false);
   };
   const navToFriendInfo = () => {
-    nav(routerEnum.friendInfo);
+    homeNavNavigate(routerEnum.friendInfo);
   };
   const navToGroupInfo = () => {
-    nav(routerEnum.groupInfo);
+    homeNavNavigate(routerEnum.groupInfo);
   };
   const navToSubmitMyInfo = () => {
-    nav(routerEnum.submitMyInfo);
+    homeNavNavigate(routerEnum.submitMyInfo);
   };
   const navToSubmitGroupInfo = () => {
-    nav(routerEnum.submitGroupInfo);
+    homeNavNavigate(routerEnum.submitGroupInfo);
   };
   const navToAddRelationship = () => {
-    nav(routerEnum.addRelationship);
+    homeNavNavigate(routerEnum.addRelationship);
   };
   const navToInviteGroupMember = () => {
-    nav(routerEnum.inviteGroupMember);
+    homeNavNavigate(routerEnum.inviteGroupMember);
   };
   const navToSetUpGroup = () => {
-    nav(routerEnum.setUpGroupPage);
+    homeNavNavigate(routerEnum.setUpGroupPage);
   };
 
   const navToMessage = () => {
@@ -73,6 +75,13 @@ export function useNav() {
   const navToDoc = () => {
     homeNavNavigate(routerEnum.doc);
   };
+  const navToDocInfo = (newDoctId = curDocId) => {
+    setCurDocId(newDoctId);
+    homeNavNavigate(routerEnum.docInfo);
+  };
+  const navToSubmitDocInfo = () => {
+    homeNavNavigate(routerEnum.submitDocInfo);
+  };
 
   const navToPost = (newPostUserId = '') => {
     setCurPostUserId(newPostUserId);
@@ -80,7 +89,7 @@ export function useNav() {
   };
   const navToPostDetail = (newPostId: string) => {
     setCurPostId(newPostId);
-    nav(routerEnum.postDetail);
+    homeNavNavigate(routerEnum.postDetail);
   };
 
   const authLogin = () => {
@@ -104,6 +113,8 @@ export function useNav() {
     navToSetUpGroup,
     navToMessage,
     navToDoc,
+    navToDocInfo,
+    navToSubmitDocInfo,
     navToPost,
     navToPostDetail,
     authLogin

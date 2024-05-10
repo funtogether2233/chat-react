@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { toast } from 'react-toastify';
+import { addCollaDocApi } from '../../../../../../api/collaDoc';
 import {
   disbandGroupApi,
   exitGroupApi,
@@ -29,7 +30,12 @@ export default function GroupInfoDetail({
   }, []);
 
   const { userId, curGroupId } = useUserContext();
-  const { navToHome, navToSubmitGroupInfo, navToInviteGroupMember } = useNav();
+  const {
+    navToHome,
+    navToSubmitGroupInfo,
+    navToInviteGroupMember,
+    navToDocInfo
+  } = useNav();
   const [groupInfo, setGroupInfo] = useState<IGroupInfo>();
 
   const init = async () => {
@@ -38,6 +44,20 @@ export default function GroupInfoDetail({
         groupId: curGroupId
       });
       setGroupInfo(groupInfoRes);
+    } catch (err) {
+      toast.error(String(err));
+      console.error('err', err);
+    }
+  };
+
+  const handleAddCollaDoc = async () => {
+    try {
+      const addCollaDocRes = await addCollaDocApi({
+        groupId: curGroupId
+      });
+      toast.success('已创建新群文档');
+      navToDocInfo(String(addCollaDocRes.id));
+      console.log(addCollaDocRes);
     } catch (err) {
       toast.error(String(err));
       console.error('err', err);
@@ -87,13 +107,19 @@ export default function GroupInfoDetail({
           display={!isGroupMember(userStatus)}
           btnTxt={'编辑资料'}
           onClick={navToSubmitGroupInfo}
-          width={100}
+          width={80}
           margin="10px"
         ></SimpleButton>
         <SimpleButton
           btnTxt={'邀请成员'}
           onClick={navToInviteGroupMember}
-          width={100}
+          width={80}
+          margin="10px"
+        ></SimpleButton>
+        <SimpleButton
+          btnTxt={'创建文档'}
+          onClick={handleAddCollaDoc}
+          width={80}
           margin="10px"
         ></SimpleButton>
         <SimpleButton
@@ -107,7 +133,7 @@ export default function GroupInfoDetail({
           display={isGroupOwner(userStatus)}
           btnTxt={'解散群聊'}
           onClick={handleDisbandGroup}
-          width={100}
+          width={80}
           margin="10px"
         ></SimpleButton>
       </div>

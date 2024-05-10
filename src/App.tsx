@@ -12,6 +12,7 @@ export default function App() {
     userId: '',
     curFriendId: '',
     curGroupId: '',
+    curDocId: '',
     curPostUserId: '',
     curPostId: '',
     isLogin: false,

@@ -5,6 +5,7 @@ import {
   updateUserInfoApi
 } from '../../../../api/relationship/user';
 import SimpleButton from '../../../../components/SimpleButton';
+import { useNav } from '../../../../hooks/useNav';
 import { useUserContext } from '../../../../hooks/useUserContext';
 import { IUserInfo } from '../../../../types/relationship';
 import styles from './SubmitMyInfoPage.module.less';
@@ -16,6 +17,7 @@ export default function SubmitMyInfoPage() {
   }, []);
 
   const { userId } = useUserContext();
+  const { navToMyInfo } = useNav();
   const [userInfo, setUserInfo] = useState<IUserInfo>();
   const userNameRef = useRef<HTMLInputElement>(null);
   const userIntroductionRef = useRef<HTMLInputElement>(null);
@@ -61,6 +63,7 @@ export default function SubmitMyInfoPage() {
         avatarImg: newAvatarImg
       });
       console.log(updateUserInfoRes);
+      navToMyInfo();
       toast.success('更新成功');
     } catch (err) {
       toast.error(String(err));
@@ -106,7 +109,7 @@ export default function SubmitMyInfoPage() {
       <SimpleButton
         btnTxt={'更新信息'}
         onClick={updateUserInfo}
-        width={100}
+        width={80}
         margin="20px"
       ></SimpleButton>
     </div>

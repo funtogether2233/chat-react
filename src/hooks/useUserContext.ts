@@ -12,6 +12,7 @@ export function useUserContext() {
       userId: '',
       curFriendId: '',
       curGroupId: '',
+      curDocId: '',
       curPostUserId: '',
       curPostId: '',
       isLogin: false,
@@ -31,6 +32,10 @@ export function useUserContext() {
     setUserInfo((cur) => ({ ...cur, curPostUserId: newPostUserId }));
   };
 
+  const setCurDocId = (newDocId: string) => {
+    setUserInfo((cur) => ({ ...cur, curDocId: newDocId }));
+  };
+
   const setCurPostId = (newPostId: string) => {
     setUserInfo((cur) => ({ ...cur, curPostId: newPostId }));
   };
@@ -45,6 +50,7 @@ export function useUserContext() {
     userId: userInfo.userId,
     curFriendId: userInfo.curFriendId,
     curGroupId: userInfo.curGroupId,
+    curDocId: userInfo.curDocId,
     curPostUserId: userInfo.curPostUserId,
     curPostId: userInfo.curPostId,
     isLogin: userInfo.isLogin,
@@ -52,6 +58,7 @@ export function useUserContext() {
     initUserContext,
     setCurFriendId,
     setCurGroupId,
+    setCurDocId,
     setCurPostUserId,
     setCurPostId,
     setHomeNavState
