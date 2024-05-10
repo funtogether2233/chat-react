@@ -20,6 +20,14 @@ export function useUserContext() {
     }));
   };
 
+  const loginInit = (userId: string) => {
+    setUserInfo((cur) => ({
+      ...cur,
+      isLogin: true,
+      userId
+    }));
+  };
+
   const setCurFriendId = (newFriendId: string) => {
     setUserInfo((cur) => ({ ...cur, curFriendId: newFriendId }));
   };
@@ -56,6 +64,7 @@ export function useUserContext() {
     isLogin: userInfo.isLogin,
     homeNavState: userInfo.homeNavState,
     initUserContext,
+    loginInit,
     setCurFriendId,
     setCurGroupId,
     setCurDocId,

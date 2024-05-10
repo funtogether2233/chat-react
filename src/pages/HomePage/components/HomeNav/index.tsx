@@ -48,12 +48,7 @@ export default function ChatNav() {
       <div className={styles.navBtn} onClick={() => navToPost()}>
         动态
       </div>
-      <div
-        className={styles.navBtn}
-        onClick={() => {
-          exit();
-        }}
-      >
+      <div className={styles.navBtn} onClick={exit}>
         退出
       </div>
     </div>

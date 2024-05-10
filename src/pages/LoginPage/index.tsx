@@ -14,7 +14,7 @@ export default function LoginPage() {
     }
   });
 
-  const { isLogin, setUserInfo } = useUserContext();
+  const { isLogin, loginInit } = useUserContext();
   const { navToHome } = useNav();
   const [userId, setUserId] = useState('');
   const [userPwd, setUserPwd] = useState('');
@@ -28,11 +28,7 @@ export default function LoginPage() {
     }
     try {
       const loginRes = await loginApi({ userId, userPwd });
-      setUserInfo((current) => ({
-        ...current,
-        isLogin: true,
-        userId: loginRes.userId
-      }));
+      loginInit(loginRes.userId);
       const sucContent = '登录成功';
       toast.success(sucContent);
     } catch (err) {
