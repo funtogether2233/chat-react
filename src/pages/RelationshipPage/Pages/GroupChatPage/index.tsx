@@ -97,10 +97,8 @@ export default function GroupChatPage() {
 
   return (
     <div className={styles.groupChatRoom}>
-      <div className={styles.groupInfoWrap}>
-        <div className={styles.groupInfo} onClick={() => navToGroupInfo()}>
-          {groupInfo?.groupName}
-        </div>
+      <div className={styles.groupInfoWrap} onClick={() => navToGroupInfo()}>
+        <div className={styles.groupInfo}>{groupInfo?.groupName}</div>
       </div>
       <div className={styles.groupMsg}>{MessageList}</div>
       <div className={styles.inputWrap}>

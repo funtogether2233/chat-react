@@ -10,6 +10,9 @@ import FriendItem from '../FriendItem';
 import GroupItem from '../GroupItem';
 import styles from './ChatList.module.less';
 
+const ADD_FRIEND_IMG = 'src/assets/add_friend_img.png';
+const CREATE_GROUP_IMG = 'src/assets/create_group_img.png';
+
 export default function ChatList({
   relaState,
   setRelaState
@@ -101,6 +104,7 @@ export default function ChatList({
             navToAddRelationship();
           }}
         >
+          <img src={ADD_FRIEND_IMG} />
           加好友/群
         </div>
         <div
@@ -109,6 +113,7 @@ export default function ChatList({
             navToSetUpGroup();
           }}
         >
+          <img src={CREATE_GROUP_IMG} />
           发起群聊
         </div>
       </div>

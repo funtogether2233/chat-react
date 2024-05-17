@@ -65,6 +65,7 @@ export default function LoginPage() {
             onChange={(e) => {
               setUserId(e.target.value);
             }}
+            placeholder="请输入账号id"
           ></input>
         </div>
         <div className={styles.inputItem}>
@@ -75,6 +76,7 @@ export default function LoginPage() {
             onChange={(e) => {
               setUserPwd(e.target.value);
             }}
+            placeholder="请输入账号密码"
           ></input>
         </div>
       </div>
@@ -89,5 +91,9 @@ export default function LoginPage() {
     </div>
   );
 
-  return <CardWrap titleContent="登录">{loginContent}</CardWrap>;
+  return (
+    <div className={styles.loginPage}>
+      <CardWrap titleContent="登录">{loginContent}</CardWrap>
+    </div>
+  );
 }

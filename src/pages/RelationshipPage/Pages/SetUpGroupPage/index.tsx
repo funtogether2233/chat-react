@@ -45,6 +45,7 @@ export default function SetUpGroupPage() {
           onChange={(e) => {
             setNewGroupId(e.target.value);
           }}
+          placeholder="请输入群聊id"
         />
       </div>
       <div className={styles.inputWrap}>
@@ -55,6 +56,7 @@ export default function SetUpGroupPage() {
           onChange={(e) => {
             setNewGroupName(e.target.value);
           }}
+          placeholder="请输入群聊名称"
         />
       </div>
       <SimpleButton

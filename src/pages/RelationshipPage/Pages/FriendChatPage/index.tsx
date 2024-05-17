@@ -94,10 +94,8 @@ export default function FriendChatPage() {
 
   return (
     <div className={styles.friendChatRoom}>
-      <div className={styles.friendInfoWrap}>
-        <div className={styles.friendInfo} onClick={() => navToFriendInfo()}>
-          {userInfo?.userName}
-        </div>
+      <div className={styles.friendInfoWrap} onClick={() => navToFriendInfo()}>
+        <div className={styles.friendInfo}>{userInfo?.userName}</div>
       </div>
       <div className={styles.friendMsg}>{MessageList}</div>
       <div className={styles.inputWrap}>

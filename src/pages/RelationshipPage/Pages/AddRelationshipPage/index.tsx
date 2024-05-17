@@ -13,6 +13,9 @@ import FriendItem from '../../components/FriendItem';
 import GroupItem from '../../components/GroupItem';
 import styles from './AddRelationshipPage.module.less';
 
+const ADD_FRIEND_IMG = 'src/assets/add_friend_img.png';
+const ADD_GROUP_IMG = 'src/assets/add_Group_img.png';
+
 export enum addRelaStateEnum {
   friend = 'friend',
   group = 'group'
@@ -186,12 +189,14 @@ export default function AddRelationshipPage() {
           className={styles.btn}
           onClick={() => selectAddRelationshipState(addRelaStateEnum.friend)}
         >
+          <img src={ADD_FRIEND_IMG} />
           加好友
         </div>
         <div
           className={styles.btn}
           onClick={() => selectAddRelationshipState(addRelaStateEnum.group)}
         >
+          <img src={ADD_GROUP_IMG} />
           加群
         </div>
       </div>

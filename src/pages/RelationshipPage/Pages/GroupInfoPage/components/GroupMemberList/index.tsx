@@ -200,7 +200,7 @@ export default function GroupMemberList({
         <SimpleButton
           display={
             userId !== memberId &&
-            !isGroupOwner(memberStatus) &&
+            isGroupMember(memberStatus) &&
             !isGroupMember(userStatus)
           }
           btnTxt={'踢出群聊'}
